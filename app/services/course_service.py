@@ -1,4 +1,4 @@
-courses = []
+from Data.db import courses
 
 def add_course(title, teacher_id):
     course_id = len(courses) + 1

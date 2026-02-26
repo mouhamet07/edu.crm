@@ -5,7 +5,7 @@ from app.services.course_service import (
     delete_course,
     assign_student_to_course
 )
-from app.auth.auth_service import login_required
+from app.services.auth_service import login_required
 
 courses_bp = Blueprint("courses", __name__, url_prefix="/courses")
 
