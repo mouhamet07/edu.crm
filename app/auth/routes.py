@@ -11,7 +11,8 @@ def login():
         if username in users and users[username] == password:
             session["user"] = username
             flash("Connexion reussie !", "success")
-            return redirect(url_for("dashboard.index"))
+            #return redirect(url_for("dashboard.index"))
+            return "Connecté "
         else:
             flash("Identifiants invalides !", "danger")
     return render_template("login.html")
@@ -20,4 +21,5 @@ def login():
 def logout():
     session.pop("user", None)
     flash("Deconnecte avec succes", "info")
-    return redirect(url_for("auth.login"))
+    #return redirect(url_for("auth.login"))
+    return "Deconnecté "
