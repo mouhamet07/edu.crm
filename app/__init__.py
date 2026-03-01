@@ -1,7 +1,7 @@
 from flask import Flask
 from .auth.routes import auth_bp
 from .courses.route import courses_bp
-from application.students.route import students_bp
+from .students.route import students_bp
 
 def create_app():
     app = Flask(__name__)

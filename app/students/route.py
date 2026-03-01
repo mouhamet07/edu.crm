@@ -27,16 +27,17 @@ def create_student():
 
         add_student(name, email)
         flash("Étudiant ajouté avec succès", "success")
-        return redirect(url_for("students.students_list"))
-    
-    return "Ajouter avec succes"
-
+        #return redirect(url_for("students.students_list"))
+        return "Ajouter avec succes"
+    return "ajout etudiant"
     # return render_template("students/create.html")
 
 
 @students_bp.route("/delete/<int:id>")
 def delete_student_route(id):
-    delete_student(id)
-    flash("Étudiant supprimé", "warning")
+    if delete_student(id):
+        flash("Étudiant supprimé", "success")
+    else:
+        flash("Étudiant non supprimé", "warning")
     #return redirect(url_for("students.students_list"))
     return "Suppression"
