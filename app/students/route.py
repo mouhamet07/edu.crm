@@ -4,7 +4,7 @@ from app.services.student_service import (
     add_student,
     delete_student
 )
-
+from app.services.auth_service import login_required
 students_bp = Blueprint(
     "students",
     __name__,
@@ -13,6 +13,7 @@ students_bp = Blueprint(
 
 
 @students_bp.route("/")
+@login_required
 def students_list():
     students = list_students()
     return "Liste des etudiants"
@@ -20,6 +21,7 @@ def students_list():
 
 
 @students_bp.route("/create", methods=["GET", "POST"])
+@login_required
 def create_student():
     if request.method == "POST":
         name = request.form.get("name")
@@ -34,6 +36,7 @@ def create_student():
 
 
 @students_bp.route("/delete/<int:id>")
+@login_required
 def delete_student_route(id):
     if delete_student(id):
         flash("Étudiant supprimé", "success")
