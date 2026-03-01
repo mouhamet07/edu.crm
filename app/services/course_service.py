@@ -23,13 +23,12 @@ def assign_student_to_course(course_id, student_id):
         if course["id"] == course_id:
             if student_id not in course["student_ids"]:
                 course["student_ids"].append(student_id)
-                return "added"
-            return "already"
-    return "not_found"
+                return True
+    return False
 
 def delete_course(course_id):
     for course in courses:
         if course["id"] == course_id:
             courses.remove(course)
-            return "Le cours a été supprimé"
-    return "Ce cours n'existe pas"
+            return True
+    return False

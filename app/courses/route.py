@@ -32,16 +32,15 @@ def index():
 @courses_bp.route("/delete/<int:id>")
 @login_required
 def delete(id):
-    result = delete_course(id)
-    return result
+    if delete_course(id):
+        return "Le cours a ete supprime avec succes"
+    return "Le cours n'a pas ete trouve"
+
 
 @courses_bp.route("/assign/<int:course_id>/<int:student_id>")
 @login_required
 def assign(course_id, student_id):
     result = assign_student_to_course(course_id, student_id)
-    if result == "not_found":
-        return "Ce cours n'existe pas"
-    elif result == "already":
-        return "L'Étudiant est déjà inscrit"
-    else:
-        return f"L'étudiant {student_id} a été ajouté au cours {course_id}"
+    if result == False:
+        return "Ce cours n'existe pas ou l'Étudiant y est déjà inscrit"
+    return f"L'étudiant {student_id} a été ajouté au cours {course_id}"

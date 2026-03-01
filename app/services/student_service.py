@@ -1,5 +1,4 @@
-students = []
-current_id = 1
+from Data.db import students
 
 
 def list_students():
@@ -7,22 +6,25 @@ def list_students():
 
 
 def add_student(name, email):
-    global current_id
-
+    for student in students:
+        if student["email"].lower() == email.lower():
+            return None
+    student_id = len(students) + 1
     student = {
-        "id": current_id,
+        "id": student_id,
         "name": name,
         "email": email
     }
-
     students.append(student)
-    current_id += 1
     return student
 
 
 def delete_student(student_id):
-    global students
-    students = [s for s in students if s["id"] != student_id]
+    for student in students:
+        if student["id"] == student_id:
+            students.remove(student)
+            return True
+    return False
 
 
 def get_student_by_id(student_id):

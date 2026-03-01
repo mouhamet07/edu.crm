@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from application.services.student_service import (
+from app.services.student_service import (
     list_students,
     add_student,
     delete_student
@@ -38,4 +38,5 @@ def create_student():
 def delete_student_route(id):
     delete_student(id)
     flash("Étudiant supprimé", "warning")
-    return redirect(url_for("students.students_list"))
+    #return redirect(url_for("students.students_list"))
+    return "Suppression"
