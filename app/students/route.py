@@ -15,7 +15,8 @@ students_bp = Blueprint(
 @students_bp.route("/")
 def students_list():
     students = list_students()
-    return render_template("students/list.html", students=students)
+    return "Liste des etudiants"
+    # return render_template("students/list.html", students=students)
 
 
 @students_bp.route("/create", methods=["GET", "POST"])
@@ -27,8 +28,10 @@ def create_student():
         add_student(name, email)
         flash("Étudiant ajouté avec succès", "success")
         return redirect(url_for("students.students_list"))
+    
+    return "Ajouter avec succes"
 
-    return render_template("students/create.html")
+    # return render_template("students/create.html")
 
 
 @students_bp.route("/delete/<int:id>")
