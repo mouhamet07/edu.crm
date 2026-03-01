@@ -3,7 +3,7 @@ from . import auth_bp
 from Data.db import users
 
 
-@auth_bp.route("/login", methods=["GET", "POST"])
+@auth_bp.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         username = request.form.get("username")
