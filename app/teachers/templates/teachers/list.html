@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-8">
+
+<h1 class="text-2xl font-bold mb-6">Enseignants</h1>
+
+<a href="{{ url_for('teachers.create') }}"
+class="bg-purple-600 text-white px-4 py-2 rounded mb-4 inline-block">
+Ajouter enseignant
+</a>
+
+<table class="w-full bg-white rounded shadow">
+
+<thead class="bg-gray-100">
+<tr>
+<th class="p-3">ID</th>
+<th class="p-3">Nom</th>
+<th class="p-3">Email</th>
+<th class="p-3">Spécialité</th>
+<th class="p-3"></th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for teacher in teachers %}
+
+<tr class="border-t">
+
+<td class="p-3">{{ loop.index }}</td>
+<td class="p-3">{{ teacher.name }}</td>
+<td class="p-3">{{ teacher.email }}</td>
+<td class="p-3">{{ teacher.speciality }}</td>
+
+<td class="p-3 text-right">
+
+<a href="{{ url_for('teachers.delete_teacher', id=loop.index0) }}"
+class="text-red-500">
+Supprimer
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

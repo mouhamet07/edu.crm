@@ -11,15 +11,14 @@ def login():
         if username in users and users[username] == password:
             session["user"] = username
             flash("Connexion reussie !", "success")
-            #return redirect(url_for("dashboard.index"))
-            return "Connecté "
+            return redirect(url_for("dashboard.index"))
         else:
             flash("Identifiants invalides !", "danger")
-    return render_template("login.html")
+    return render_template("auth/login.html")
+
 
 @auth_bp.route("/logout")
 def logout():
     session.pop("user", None)
     flash("Deconnecte avec succes", "info")
-    #return redirect(url_for("auth.login"))
-    return "Deconnecté "
+    return redirect(url_for("auth.login"))

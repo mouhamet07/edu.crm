@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-8">
+
+  <div class="flex items-center justify-between mb-6">
+
+    <h1 class="text-2xl font-bold text-gray-800">
+      Liste des étudiants
+    </h1>
+
+    <a href="{{ url_for('students.create') }}"
+       class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+       Ajouter un étudiant
+    </a>
+
+  </div>
+
+
+  <div class="bg-white rounded-xl shadow border border-gray-100 overflow-hidden">
+
+    <table class="w-full text-sm">
+
+      <thead class="bg-gray-50">
+        <tr class="text-left text-gray-500 uppercase text-xs">
+          <th class="p-4">ID</th>
+          <th class="p-4">Nom</th>
+          <th class="p-4">Email</th>
+          <th class="p-4 text-right">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+      {% for student in students %}
+
+        <tr class="border-t">
+
+          <td class="p-4 font-semibold text-gray-500">
+            #{{ loop.index }}
+          </td>
+
+          <td class="p-4 font-semibold text-gray-800">
+            {{ student.name }}
+          </td>
+
+          <td class="p-4 text-gray-600">
+            {{ student.email }}
+          </td>
+
+          <td class="p-4 text-right">
+
+            <a href="{{ url_for('students.delete_student', id=loop.index0) }}"
+               class="text-red-500 hover:text-red-700 text-sm font-semibold">
+               Supprimer
+            </a>
+
+          </td>
+
+        </tr>
+
+      {% endfor %}
+
+      {% if students|length == 0 %}
+
+      <tr>
+        <td colspan="4" class="text-center p-8 text-gray-400">
+          Aucun étudiant enregistré
+        </td>
+      </tr>
+
+      {% endif %}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-8 max-w-xl">
+
+<h1 class="text-2xl font-bold mb-6">
+Assigner cours à étudiant
+</h1>
+
+<form method="POST" class="space-y-4">
+
+<select name="student" class="w-full border p-2 rounded">
+
+{% for student in students %}
+
+<option value="{{ loop.index0 }}">
+{{ student.name }}
+</option>
+
+{% endfor %}
+
+</select>
+
+
+<select name="course" class="w-full border p-2 rounded">
+
+{% for course in courses %}
+
+<option value="{{ loop.index0 }}">
+{{ course.name }}
+</option>
+
+{% endfor %}
+
+</select>
+
+
+<button class="bg-purple-600 text-white px-4 py-2 rounded">
+Assigner
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}
