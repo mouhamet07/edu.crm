@@ -21,12 +21,11 @@ def add_student(name, email):
 
 def delete_student(student_id):
     for student in students:
-        if student["id"] == student_id:
+        if student.get("id") == student_id:
             students.remove(student)
             return True
+
     return False
-
-
 def get_student_by_id(student_id):
     for student in students:
         if student["id"] == student_id:
