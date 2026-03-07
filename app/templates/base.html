@@ -1,7 +1,17 @@
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endwith %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edu CRM</title>
+</head>
+<body>
+
+<nav>
+    <a href="/teachers">Teachers</a>
+</nav>
+
+<hr>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

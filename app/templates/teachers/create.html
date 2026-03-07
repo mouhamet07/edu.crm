@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Ajouter un enseignant</h2>
+
+<form method="POST">
+    <input type="text" name="name" placeholder="Nom" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="speciality" placeholder="Spécialité" required>
+    <button type="submit">Ajouter</button>
+</form>
+
+{% endblock %}
