@@ -21,9 +21,9 @@ Assigner cours
 <thead class="bg-gray-100">
 
 <tr>
-<th class="p-3">ID</th>
-<th class="p-3">Nom</th>
-<th class="p-3"></th>
+<th class="p-3 text-center">ID</th>
+<th class="p-3 text-left">Nom</th>
+<th class="p-3 text-right"></th>
 </tr>
 
 </thead>
@@ -34,12 +34,12 @@ Assigner cours
 
 <tr class="border-t">
 
-<td class="p-3">{{ loop.index }}</td>
-<td class="p-3">{{ course.name }}</td>
+<td class="p-3 text-center">{{ loop.index0 + 1 }}</td>
+<td class="p-3 text-left">{{ course.title }}</td>
 
 <td class="p-3 text-right">
 
-<a href="{{ url_for('courses.delete_course', id=loop.index0) }}"
+<a href="{{ url_for('courses.delete', id=loop.index0) }}"
 class="text-red-500">
 Supprimer
 </a>
