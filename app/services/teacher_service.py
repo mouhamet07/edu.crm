@@ -14,7 +14,6 @@ def add_teacher(name, email, speciality):
 def list_teachers():
     return teachers
 
-
 def delete_teacher(teacher_id):
     for teacher in teachers:
         if teacher["id"] == teacher_id:
