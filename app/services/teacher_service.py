@@ -8,6 +8,7 @@ def add_teacher(name, email, speciality):
         "speciality": speciality
     }
     teachers.append(teacher)
+    return teacher
 
 
 def list_teachers():

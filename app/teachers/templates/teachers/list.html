@@ -29,14 +29,14 @@ Ajouter enseignant
 
 <tr class="border-t">
 
-<td class="p-3">{{ loop.index }}</td>
+<td class="p-3">{{ teacher.id }}</td>
 <td class="p-3">{{ teacher.name }}</td>
 <td class="p-3">{{ teacher.email }}</td>
 <td class="p-3">{{ teacher.speciality }}</td>
 
 <td class="p-3 text-right">
 
-<a href="{{ url_for('teachers.delete_teacher', id=loop.index0) }}"
+<a href="{{ url_for('teachers.delete_teacher', id=teacher.id) }}"
 class="text-red-500">
 Supprimer
 </a>

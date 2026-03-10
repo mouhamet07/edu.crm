@@ -1,166 +1,105 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <div class="rounded-2xl flex items-center justify-between px-8 py-6 mb-8"
+      style="background:linear-gradient(135deg,#ede9f8 0%,#dcd3f5 100%);">
+    <div>
+      <h2 class="text-2xl font-extrabold text-gray-800">Bienvenue 👋</h2>
+      <p class="text-gray-500 text-sm mt-1">
+        Gérez vos étudiants, enseignants et cours depuis un seul endroit.
+      </p>
 
-<!-- ================= BANNIÈRE ================= -->
+      <div class="flex gap-3 mt-4">
+        <a href="{{ url_for('students.create') }}"
+          class="text-xs font-semibold px-4 py-2 rounded-xl text-white"
+          style="background:#7c5cbf;">
+          + Ajouter un étudiant
+        </a>
 
-<div class="rounded-2xl flex items-center justify-between px-8 py-6 mb-8"
-     style="background:linear-gradient(135deg,#ede9f8 0%,#dcd3f5 100%);">
+        <a href="{{ url_for('courses.index') }}"
+          class="text-xs font-semibold px-4 py-2 rounded-xl"
+          style="background:rgba(255,255,255,0.5);color:#7c5cbf;">
+          Voir les cours
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="grid grid-cols-3 gap-6 mb-10">
+
+    <div class="rounded-2xl p-6 text-white"
+        style="background:linear-gradient(135deg,#a580e0 0%,#7c5cbf 100%);">
+      <p class="text-4xl font-extrabold">{{ total_students }}</p>
+      <p class="text-sm mt-1">Total Étudiants</p>
+    </div>
+
+    <div class="rounded-2xl p-6 text-white"
+        style="background:linear-gradient(135deg,#4a90d9 0%,#2c6fad 100%);">
+      <p class="text-4xl font-extrabold">{{ total_teachers }}</p>
+      <p class="text-sm mt-1">Total Enseignants</p>
+    </div>
+
+    <div class="rounded-2xl p-6 text-white"
+        style="background:linear-gradient(135deg,#2ecc8f 0%,#1a9968 100%);">
+      <p class="text-4xl font-extrabold">{{ total_courses }}</p>
+      <p class="text-sm mt-1">Total Cours</p>
+    </div>
+
+  </div>
+
 
   <div>
-    <h2 class="text-2xl font-extrabold text-gray-800">Bienvenue 👋</h2>
-    <p class="text-gray-500 text-sm mt-1">
-      Gérez vos étudiants, enseignants et cours depuis un seul endroit.
-    </p>
 
+    <div class="flex items-center justify-between mb-4">
+      <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
+        Cours récents
+      </p>
 
-<div class="flex gap-3 mt-4">
-  <button class="text-xs font-semibold px-4 py-2 rounded-xl text-white"
-          style="background:#7c5cbf;">
-    + Ajouter un étudiant
-  </button>
-
-  <button class="text-xs font-semibold px-4 py-2 rounded-xl"
-          style="background:rgba(255,255,255,0.5);color:#7c5cbf;">
-    Voir les cours
-  </button>
-</div>
-
-
-  </div>
-
-  
-
-</div>
-
-
-
-<!-- ================= CARDS STATS ================= -->
-
-<div class="grid grid-cols-3 gap-6 mb-10">
-
-  <!-- Étudiants -->
-
-  <div class="rounded-2xl p-6 text-white"
-       style="background:linear-gradient(135deg,#a580e0 0%,#7c5cbf 100%);">
-    <p class="text-4xl font-extrabold">{{ total_students }}</p>
-    <p class="text-sm mt-1">Total Étudiants</p>
-  </div>
-
-  <!-- Enseignants -->
-
-  <div class="rounded-2xl p-6 text-white"
-       style="background:linear-gradient(135deg,#4a90d9 0%,#2c6fad 100%);">
-    <p class="text-4xl font-extrabold">{{ total_teachers }}</p>
-    <p class="text-sm mt-1">Total Enseignants</p>
-  </div>
-
-  <!-- Cours -->
-
-  <div class="rounded-2xl p-6 text-white"
-       style="background:linear-gradient(135deg,#2ecc8f 0%,#1a9968 100%);">
-    <p class="text-4xl font-extrabold">{{ total_courses }}</p>
-    <p class="text-sm mt-1">Total Cours</p>
-  </div>
-
-</div>
-
-<!-- ================= TABLEAU DES COURS ================= -->
-
-<div>
-
-  <!-- Titre -->
-
-  <div class="flex items-center justify-between mb-4">
-    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
-      Cours récents
-    </p>
-
-
-<button class="text-xs font-semibold px-3 py-1.5 rounded-lg text-white"
+      <a href="{{ url_for('courses.create') }}"
+        class="text-xs font-semibold px-3 py-1.5 rounded-lg text-white"
         style="background:#7c5cbf;">
-  + Nouveau cours
-</button>
+        + Nouveau cours
+      </a>
+    </div>
 
 
-  </div>
+    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
 
-  <!-- Tableau -->
-
-  <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-
-
-<!-- En-tête -->
-<div class="grid grid-cols-12 px-6 py-3 bg-gray-50 border-b text-xs font-bold text-gray-400 uppercase">
-  <p class="col-span-5">Intitulé</p>
-  <p class="col-span-4">Enseignant</p>
-  <p class="col-span-1">Actions</p>
-</div>
+      <div class="grid grid-cols-12 px-6 py-3 bg-gray-50 border-b text-xs font-bold text-gray-400 uppercase">
+        <p class="col-span-5">Intitulé</p>
+        <p class="col-span-4">Enseignant</p>
+        <p class="col-span-1">Actions</p>
+      </div>
 
 
-<!-- Ligne 1 -->
-<div class="grid grid-cols-12 items-center px-6 py-4 border-b">
+      {% for course in recent_courses %}
 
-  <div class="col-span-5">
-    <p class="font-semibold text-gray-800 text-sm">Algorithmique avancée</p>
-    <p class="text-xs text-gray-400">id: #001 · créé le 12 juin</p>
-  </div>
+      <div class="grid grid-cols-12 items-center px-6 py-4 border-b">
 
-  <div class="col-span-4 text-sm text-gray-600">
-    M. Boubacar
-  </div>
+        <div class="col-span-5">
+          <p class="font-semibold text-gray-800 text-sm">{{ course.title }}</p>
+          <p class="text-xs text-gray-400">id: #{{ course.id }}</p>
+        </div>
 
+        <div class="col-span-4 text-sm text-gray-600">
+          {{ course.teacher }}
+        </div>
 
-  <div class="col-span-1">
-    <button class="text-xs text-red-400">Suppr.</button>
-  </div>
+        <div class="col-span-1">
+          <a href="{{ url_for('courses.delete_course', id=course.id) }}"
+            class="text-xs text-red-400">
+            Suppr.
+          </a>
+        </div>
 
-</div>
+      </div>
 
+      {% endfor %}
 
-<!-- Ligne 2 -->
-<div class="grid grid-cols-12 items-center px-6 py-4 border-b">
-
-  <div class="col-span-5">
-    <p class="font-semibold text-gray-800 text-sm">Bases de données</p>
-    <p class="text-xs text-gray-400">id: #002 · créé le 5 juin</p>
-  </div>
-
-  <div class="col-span-4 text-sm text-gray-600">
-    Mme Diallo
-  </div>
-
-  
-  <div class="col-span-1">
-    <button class="text-xs text-red-400">Suppr.</button>
-  </div>
-
-</div>
-
-
-<!-- Ligne 3 -->
-<div class="grid grid-cols-12 items-center px-6 py-4">
-
-  <div class="col-span-5">
-    <p class="font-semibold text-gray-800 text-sm">Introduction aux réseaux</p>
-    <p class="text-xs text-gray-400">id: #003 · créé le 1 juin</p>
-  </div>
-
-  <div class="col-span-4 text-sm text-gray-600">
-    M. Touré
-  </div>
-
-  
-
-  <div class="col-span-1">
-    <button class="text-xs text-red-400">Suppr.</button>
-  </div>
-
-</div>
-
+    </div>
 
   </div>
-
-</div>
 
 {% endblock %}
