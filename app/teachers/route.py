@@ -19,7 +19,7 @@ def create():
         email = request.form.get("email")
         speciality = request.form.get("speciality")
         add_teacher(name, email, speciality)
-        return redirect(url_for("teachers.teachers_list"))
+        return redirect(url_for("teachers.index"))
     return render_template("teachers/create.html")
 
 
@@ -30,4 +30,4 @@ def delete_teacher(id):
         flash("Enseignant supprimé", "success")
     else:
         flash("Enseignant non supprimé", "warning")
-    return redirect(url_for("teachers.teachers_list"))
+    return redirect(url_for("teachers.index"))
