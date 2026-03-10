@@ -6,10 +6,10 @@ students = [
 ]
 
 teachers = [
-    {"id": 1, "name": "Diallo"},
-    {"id": 2, "name": "Sow"},
-    {"id": 3, "name": "Barry"},
-    {"id": 4, "name": "Camara"}
+    {"id": 1, "name": "Diallo", "email": "diallo@gmail.com", "speciality": "Dev"},
+    {"id": 2, "name": "Sow", "email": "sow@gmail.com", "speciality": "Base de donnees"},
+    {"id": 3, "name": "Barry", "email": "barry@gmail.com", "speciality": "Dev"},
+    {"id": 4, "name": "Camara", "email": "camara@gmail.com", "speciality": "Reseaux"}
 ]
 
 courses = [

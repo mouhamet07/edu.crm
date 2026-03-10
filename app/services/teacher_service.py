@@ -15,7 +15,7 @@ def list_teachers():
     return teachers
 
 
-def delete_student(teacher_id):
+def delete_teacher(teacher_id):
     for teacher in teachers:
         if teacher["id"] == teacher_id:
             teachers.remove(teacher)

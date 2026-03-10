@@ -1,9 +1,0 @@
-body { font-family: 'DM Sans', sans-serif; }
-.input-field:focus { outline: none; border-color: #7c5cbf; box-shadow: 0 0 0 3px rgba(74,159,212,0.15); }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-.card { animation: fadeUp 0.5s ease both; }
-@keyframes avatarPop { 0% { transform: scale(0.6); opacity: 0; } 70% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
-.avatar { animation: avatarPop 0.55s cubic-bezier(.34,1.56,.64,1) 0.2s both; }
-.btn-login { background: linear-gradient(135deg, #7c5cbf 0%,#2c6fad 100%); transition: filter 0.2s, transform 0.15s; }
-.btn-login:hover { filter: brightness(1.08); transform: translateY(-1px); }
-.btn-login:active { transform: translateY(0); filter: brightness(0.97); }

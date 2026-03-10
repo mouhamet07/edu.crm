@@ -33,7 +33,7 @@ def create():
 
 @students_bp.route("/students/delete/<int:id>")
 @login_required
-def delete_student_route(id):
+def delete_student(id):
     if delete_student(id):
         flash("Étudiant supprimé", "success")
     else:
