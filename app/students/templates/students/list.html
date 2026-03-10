@@ -11,8 +11,8 @@
     </h1>
 
     <a href="{{ url_for('students.create') }}"
-       class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
-       Ajouter un étudiant
+      class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+      Ajouter un étudiant
     </a>
 
   </div>
@@ -38,7 +38,7 @@
         <tr class="border-t">
 
           <td class="p-4 font-semibold text-gray-500">
-            #{{ loop.index }}
+            #{{ student.id }}
           </td>
 
           <td class="p-4 font-semibold text-gray-800">
@@ -51,9 +51,9 @@
 
           <td class="p-4 text-right">
 
-            <a href="{{ url_for('students.delete_student', id=loop.index0) }}"
-               class="text-red-500 hover:text-red-700 text-sm font-semibold">
-               Supprimer
+            <a href="{{ url_for('students.delete_student', id=student.id) }}"
+              class="text-red-500 hover:text-red-700 text-sm font-semibold">
+              Supprimer
             </a>
 
           </td>

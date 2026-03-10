@@ -6,4 +6,3 @@ dashboard_bp = Blueprint(
     template_folder='templates'  
 )
 
-from . import route

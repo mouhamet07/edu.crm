@@ -5,5 +5,3 @@ students_bp = Blueprint(
     __name__,
     template_folder="templates"
 )
-
-from . import route
