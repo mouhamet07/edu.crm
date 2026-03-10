@@ -1,7 +1,4 @@
-﻿<<<<<<< HEAD
-
-=======  
-from flask import Flask
+﻿from flask import Flask
 from .auth.routes import auth_bp
 from .courses.route import courses_bp
 from .students.route import students_bp
