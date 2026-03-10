@@ -1,46 +1,41 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash
+from . import students_bp
+from app.services.auth_service import login_required
 from app.services.student_service import (
     list_students,
     add_student,
     delete_student
 )
-from app.services.auth_service import login_required
-students_bp = Blueprint(
-    "students",
-    __name__,
-    url_prefix="/students"
-)
 
-
-@students_bp.route("/")
+@students_bp.route("/students")
 @login_required
-def students_list():
+def index():
     students = list_students()
-    return "Liste des etudiants"
-    # return render_template("students/list.html", students=students)
+    return render_template(
+        "students/list.html",
+        students=students
+    )
 
 
-@students_bp.route("/create", methods=["GET", "POST"])
+@students_bp.route("/students/create", methods=["GET", "POST"])
 @login_required
-def create_student():
+def create():
     if request.method == "POST":
         name = request.form.get("name")
         email = request.form.get("email")
+        if add_student(name, email):
+            flash("Étudiant ajouté avec succès", "success")
+        else:
+            flash("Erreur lors de l'ajout", "danger")
+        return redirect(url_for("students.index"))
+    return render_template("students/create.html")
 
-        add_student(name, email)
-        flash("Étudiant ajouté avec succès", "success")
-        #return redirect(url_for("students.students_list"))
-        return "Ajouter avec succes"
-    return "ajout etudiant"
-    # return render_template("students/create.html")
 
-
-@students_bp.route("/delete/<int:id>")
+@students_bp.route("/students/delete/<int:id>")
 @login_required
-def delete_student_route(id):
+def delete_student(id):
     if delete_student(id):
         flash("Étudiant supprimé", "success")
     else:
         flash("Étudiant non supprimé", "warning")
-    #return redirect(url_for("students.students_list"))
-    return "Suppression"
+    return redirect(url_for("students.students_list"))

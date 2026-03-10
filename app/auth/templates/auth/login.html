@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connexion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    .input-field:focus { outline: none; border-color: #7c5cbf; box-shadow: 0 0 0 3px rgba(74,159,212,0.15); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .card { animation: fadeUp 0.5s ease both; }
+    @keyframes avatarPop { 0% { transform: scale(0.6); opacity: 0; } 70% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
+    .avatar { animation: avatarPop 0.55s cubic-bezier(.34,1.56,.64,1) 0.2s both; }
+    .btn-login { background: linear-gradient(135deg, #7c5cbf 0%,#2c6fad 100%); transition: filter 0.2s, transform 0.15s; }
+    .btn-login:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn-login:active { transform: translateY(0); filter: brightness(0.97); }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-[#eef2f6]">
+  <div class="card bg-white rounded-3xl shadow-xl pt-0 pb-10 px-10 w-full max-w-sm relative">
+    <div class="avatar flex justify-center -mt-12 mb-6">
+      <div class="w-24 h-24 rounded-full bg-[#4a9fd4] flex items-center justify-center shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+        </svg>
+      </div>
+    </div>
+
+    <h1 class="text-center text-gray-600 text-lg font-semibold mb-7 tracking-wide">User Log in</h1>
+    <form method="POST" action="{{ url_for('auth.login') }}" class="space-y-4">
+
+      <div class="relative">
+        <input
+          type="text"
+          name="username"
+          placeholder="User ID"
+          class="input-field w-full border border-gray-200 rounded-xl px-4 py-3 pr-12 text-sm text-gray-700 bg-gray-50 transition"
+        />
+      </div>
+
+      <div class="relative">
+        <input
+          type="password"
+          name="password"
+          placeholder="••••••••"
+          class="input-field w-full border border-gray-200 rounded-xl px-4 py-3 pr-12 text-sm text-gray-700 bg-gray-50 transition"
+        />
+      </div>
+
+      <button class="btn-login w-full text-white font-semibold text-sm tracking-widest uppercase rounded-xl py-3 mt-2">
+        Login
+      </button>
+    </form>
+    
+  </div>
+</body>
+</html>
