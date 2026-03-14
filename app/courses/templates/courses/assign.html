@@ -14,7 +14,7 @@ Assigner cours à étudiant
 
 {% for student in students %}
 
-<option value="{{ loop.index0 }}">
+<option value="{{ student.id }}">
 {{ student.name }}
 </option>
 
@@ -27,7 +27,7 @@ Assigner cours à étudiant
 
 {% for course in courses %}
 
-<option value="{{ loop.index0 }}">
+<option value="{{ course.id }}">
 {{ course.title }}
 </option>
 
