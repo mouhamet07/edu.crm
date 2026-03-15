@@ -73,94 +73,78 @@
 
   <div class="flex items-center justify-between mb-4">
     <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
-      Cours récents
+      Etudiant récemment ajoutés
     </p>
 
 
 <button class="text-xs font-semibold px-3 py-1.5 rounded-lg text-white"
         style="background:#7c5cbf;">
-  + Nouveau cours
+  + Nouvel étudiant
 </button>
 
 
   </div>
 
-  <!-- Tableau -->
-
-  <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-
-
-<!-- En-tête -->
-<div class="grid grid-cols-12 px-6 py-3 bg-gray-50 border-b text-xs font-bold text-gray-400 uppercase">
-  <p class="col-span-5">Intitulé</p>
-  <p class="col-span-4">Enseignant</p>
-  <p class="col-span-1">Actions</p>
-</div>
-
-
-<!-- Ligne 1 -->
-<div class="grid grid-cols-12 items-center px-6 py-4 border-b">
-
-  <div class="col-span-5">
-    <p class="font-semibold text-gray-800 text-sm">Algorithmique avancée</p>
-    <p class="text-xs text-gray-400">id: #001 · créé le 12 juin</p>
-  </div>
-
-  <div class="col-span-4 text-sm text-gray-600">
-    M. Boubacar
-  </div>
-
-
-  <div class="col-span-1">
-    <button class="text-xs text-red-400">Suppr.</button>
-  </div>
-
-</div>
-
-
-<!-- Ligne 2 -->
-<div class="grid grid-cols-12 items-center px-6 py-4 border-b">
-
-  <div class="col-span-5">
-    <p class="font-semibold text-gray-800 text-sm">Bases de données</p>
-    <p class="text-xs text-gray-400">id: #002 · créé le 5 juin</p>
-  </div>
-
-  <div class="col-span-4 text-sm text-gray-600">
-    Mme Diallo
-  </div>
-
   
-  <div class="col-span-1">
-    <button class="text-xs text-red-400">Suppr.</button>
+  <div class="bg-white rounded-xl shadow border border-gray-100 overflow-hidden">
+
+    <table class="w-full text-sm">
+
+      <thead class="bg-gray-50">
+        <tr class="text-left text-gray-500 uppercase text-xs">
+          <th class="p-4">ID</th>
+          <th class="p-4">Nom</th>
+          <th class="p-4">Email</th>
+          <th class="p-4 text-right">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+      {% for student in students %}
+
+        <tr class="border-t">
+
+          <td class="p-4 font-semibold text-gray-500">
+            #{{ loop.index }}
+          </td>
+
+          <td class="p-4 font-semibold text-gray-800">
+            {{ student.name }}
+          </td>
+
+          <td class="p-4 text-gray-600">
+            {{ student.email }}
+          </td>
+
+          <td class="p-4 text-right">
+
+            <a href="{{ url_for('students.delete_student', id=loop.index0) }}"
+               class="inline-block bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
+                Supprimer
+            </a>
+
+          </td>
+
+        </tr>
+
+      {% endfor %}
+
+      {% if students|length == 0 %}
+
+      <tr>
+        <td colspan="4" class="text-center p-8 text-gray-400">
+          Aucun étudiant enregistré
+        </td>
+      </tr>
+
+      {% endif %}
+
+      </tbody>
+
+    </table>
+
   </div>
 
-</div>
-
-
-<!-- Ligne 3 -->
-<div class="grid grid-cols-12 items-center px-6 py-4">
-
-  <div class="col-span-5">
-    <p class="font-semibold text-gray-800 text-sm">Introduction aux réseaux</p>
-    <p class="text-xs text-gray-400">id: #003 · créé le 1 juin</p>
-  </div>
-
-  <div class="col-span-4 text-sm text-gray-600">
-    M. Touré
-  </div>
-
-  
-
-  <div class="col-span-1">
-    <button class="text-xs text-red-400">Suppr.</button>
-  </div>
-
-</div>
-
-
-  </div>
-
-</div>
 
 {% endblock %}
