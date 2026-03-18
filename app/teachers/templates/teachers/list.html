@@ -8,7 +8,7 @@
 
 <a href="{{ url_for('teachers.create') }}"
 class="bg-purple-600 text-white px-4 py-2 rounded mb-4 inline-block">
-Ajouter enseignant
+<i class="bi bi-plus-circle"></i> Ajouter enseignant
 </a>
 
 <table class="w-full bg-white rounded shadow">
@@ -19,7 +19,7 @@ Ajouter enseignant
 <th class="p-3">Nom</th>
 <th class="p-3">Email</th>
 <th class="p-3">Spécialité</th>
-<th class="p-3"></th>
+<th class="p-3">Actions</th>
 </tr>
 </thead>
 
@@ -38,7 +38,7 @@ Ajouter enseignant
 
 <a href="{{ url_for('teachers.delete_teacher', id=teacher.id) }}"
     class="inline-block bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
-    Supprimer
+    <i class="bi bi-trash3"></i> Supprimer
 </a>
 
 </td>

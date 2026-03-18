@@ -13,9 +13,24 @@ teachers = [
 ]
 
 courses = [
-    {"id": 1, "title": "Algo", "teacher_id": 1},
-    {"id": 2, "title": "BD", "teacher_id": 2},
-    {"id": 3, "title": "Réseaux", "teacher_id": 3}
+    {
+        "id": 1,
+        "title": "Algo",
+        "teacher_id": 1,
+        "student_ids": []
+    },
+    {
+        "id": 2,
+        "title": "BD",
+        "teacher_id": 2,
+        "student_ids": []
+    },
+    {
+        "id": 3,
+        "title": "Réseaux",
+        "teacher_id": 3,
+        "student_ids": []
+    }
 ]
 
 student_courses = {}

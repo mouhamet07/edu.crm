@@ -8,23 +8,11 @@
      style="background:linear-gradient(135deg,#ede9f8 0%,#dcd3f5 100%);">
 
   <div>
-    <h2 class="text-2xl font-extrabold text-gray-800">Bienvenue 👋</h2>
+    <h2 class="text-2xl font-extrabold text-gray-800">Bienvenue </h2>
     <p class="text-gray-500 text-sm mt-1">
       Gérez vos étudiants, enseignants et cours depuis un seul endroit.
     </p>
 
-
-<div class="flex gap-3 mt-4">
-  <button class="text-xs font-semibold px-4 py-2 rounded-xl text-white"
-          style="background:#7c5cbf;">
-    + Ajouter un étudiant
-  </button>
-
-  <button class="text-xs font-semibold px-4 py-2 rounded-xl"
-          style="background:rgba(255,255,255,0.5);color:#7c5cbf;">
-    Voir les cours
-  </button>
-</div>
 
 
   </div>
@@ -76,10 +64,10 @@
       Etudiant récemment ajoutés
     </p>
 
-
-<button class="text-xs font-semibold px-3 py-1.5 rounded-lg text-white"
-        style="background:#7c5cbf;">
-  + Nouvel étudiant
+  <a href="{{ url_for('students.create') }}"
+      class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+      <i class="bi bi-plus-circle"></i> Nouvel étudiant
+    </a>
 </button>
 
 
@@ -91,11 +79,11 @@
     <table class="w-full text-sm">
 
       <thead class="bg-gray-50">
-        <tr class="text-left text-gray-500 uppercase text-xs">
+        <tr class="text-gray-500 uppercase text-xs">
           <th class="p-4">ID</th>
           <th class="p-4">Nom</th>
           <th class="p-4">Email</th>
-          <th class="p-4 text-right">Actions</th>
+          <th class="p-4 ">Actions</th>
         </tr>
       </thead>
 
@@ -106,7 +94,7 @@
         <tr class="border-t">
 
           <td class="p-4 font-semibold text-gray-500">
-            #{{ loop.index }}
+            {{ student.id }}
           </td>
 
           <td class="p-4 font-semibold text-gray-800">
@@ -120,8 +108,8 @@
           <td class="p-4 text-right">
 
             <a href="{{ url_for('students.delete_student', id=loop.index0) }}"
-               class="inline-block bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
-                Supprimer
+              class="inline-block bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
+                <i class="bi bi-trash3"></i> Supprimer
             </a>
 
           </td>

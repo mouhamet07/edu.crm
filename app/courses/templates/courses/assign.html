@@ -41,6 +41,21 @@
 
         </form>     
 
-    </div>
+<option value="{{ course.id }}">
+{{ course.title }}
+</option>
+
+{% endfor %}
+
+</select>
+
+
+<button class="bg-purple-600 text-white px-4 py-2 rounded">
+Assigner
+</button>
+
+</form>
+
+</div>
 
 {% endblock %}
