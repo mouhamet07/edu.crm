@@ -29,12 +29,12 @@ class="bg-purple-600 text-white px-4 py-2 rounded mb-4 inline-block">
 
 <tr class="border-t">
 
-<td class="p-3">{{ teacher.id }}</td>
-<td class="p-3">{{ teacher.name }}</td>
-<td class="p-3">{{ teacher.email }}</td>
-<td class="p-3">{{ teacher.speciality }}</td>
+<td class="p-4">{{ teacher.id }}</td>
+<td class="p-4">{{ teacher.name }}</td>
+<td class="p-4">{{ teacher.email }}</td>
+<td class="p-4">{{ teacher.speciality }}</td>
 
-<td class="p-3 text-right">
+<td class="p-4">
 
 <a href="{{ url_for('teachers.delete_teacher', id=teacher.id) }}"
     class="inline-block bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
