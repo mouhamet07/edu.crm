@@ -5,26 +5,25 @@
     <div class="p-8">
 
         <h1 class="text-2xl font-bold mb-6">Cours</h1>
+<a href="{{ url_for('courses.create') }}"
+class="bg-purple-600 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-700 transition">
+Créer cours
+</a>
 
-        <a href="{{ url_for('courses.create') }}"
-        class="bg-purple-600 text-white px-4 py-2 rounded">
-            Créer cours
-        </a>
+<a href="{{ url_for('courses.assign') }}"
+class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition ml-3">
+Assigner cours
+</a>
 
-        <a href="{{ url_for('courses.assign') }}"
-        class="bg-blue-600 text-white px-4 py-2 rounded ml-3">
-            Assigner cours
-        </a>
+<table class="w-full bg-white rounded-xl shadow mt-6 overflow-hidden">
 
-        <table class="w-full bg-white rounded shadow mt-4">
+<thead class="bg-gray-100 text-gray-600 text-sm uppercase">
 
-            <thead class="bg-gray-100">
-
-                <tr>
-                    <th class="p-3">ID</th>
-                    <th class="p-3">Nom</th>
-                    <th class="p-3"></th>
-                </tr>
+<tr>
+<th class="p-3 text-left">ID</th>
+<th class="p-3 text-left">Nom</th>
+<th class="p-3 text-right">Actions</th>
+</tr>
 
             </thead>
 
@@ -32,7 +31,8 @@
 
                 {% for course in courses %}
 
-                    <tr class="border-t">
+
+<tr class="border-t hover:bg-gray-50">
 
                     <td class="p-3">{{ course.id }}</td>
                     <td class="p-3">{{ course.title }}</td>
@@ -40,9 +40,10 @@
                     <td class="p-3 text-right">
 
                     <a href="{{ url_for('courses.delete_course', id=course.id) }}"
-                    class="text-red-500">
-                    Supprimer
-                    </a>
+class="inline-block bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
+Supprimer
+</a>
+
 
                     </td>
 

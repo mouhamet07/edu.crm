@@ -57,12 +57,82 @@
         Cours récents
       </p>
 
+<<<<<<< HEAD
       <a href="{{ url_for('courses.create') }}"
         class="text-xs font-semibold px-3 py-1.5 rounded-lg text-white"
         style="background:#7c5cbf;">
         + Nouveau cours
       </a>
     </div>
+=======
+<div class="flex gap-3 mt-4">
+  <button class="text-xs font-semibold px-4 py-2 rounded-xl text-white"
+          style="background:#7c5cbf;">
+    + Ajouter un étudiant
+  </button>
+
+  <button class="text-xs font-semibold px-4 py-2 rounded-xl"
+          style="background:rgba(255,255,255,0.5);color:#7c5cbf;">
+    Voir les cours
+  </button>
+</div>
+
+
+  </div>
+
+  
+
+</div>
+
+
+
+<!-- ================= CARDS STATS ================= -->
+
+<div class="grid grid-cols-3 gap-6 mb-10">
+
+  <!-- Étudiants -->
+
+  <div class="rounded-2xl p-6 text-white"
+       style="background:linear-gradient(135deg,#a580e0 0%,#7c5cbf 100%);">
+    <p class="text-4xl font-extrabold">{{ total_students }}</p>
+    <p class="text-sm mt-1">Total Étudiants</p>
+  </div>
+
+  <!-- Enseignants -->
+
+  <div class="rounded-2xl p-6 text-white"
+       style="background:linear-gradient(135deg,#4a90d9 0%,#2c6fad 100%);">
+    <p class="text-4xl font-extrabold">{{ total_teachers }}</p>
+    <p class="text-sm mt-1">Total Enseignants</p>
+  </div>
+
+  <!-- Cours -->
+
+  <div class="rounded-2xl p-6 text-white"
+       style="background:linear-gradient(135deg,#2ecc8f 0%,#1a9968 100%);">
+    <p class="text-4xl font-extrabold">{{ total_courses }}</p>
+    <p class="text-sm mt-1">Total Cours</p>
+  </div>
+
+</div>
+
+<!-- ================= TABLEAU DES COURS ================= -->
+
+<div>
+
+  <!-- Titre -->
+
+  <div class="flex items-center justify-between mb-4">
+    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
+      Etudiant récemment ajoutés
+    </p>
+
+
+<button class="text-xs font-semibold px-3 py-1.5 rounded-lg text-white"
+        style="background:#7c5cbf;">
+  + Nouvel étudiant
+</button>
+>>>>>>> correction-bouton
 
 
     <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
@@ -102,4 +172,70 @@
 
   </div>
 
+<<<<<<< HEAD
 {% endblock %}
+=======
+  
+  <div class="bg-white rounded-xl shadow border border-gray-100 overflow-hidden">
+
+    <table class="w-full text-sm">
+
+      <thead class="bg-gray-50">
+        <tr class="text-left text-gray-500 uppercase text-xs">
+          <th class="p-4">ID</th>
+          <th class="p-4">Nom</th>
+          <th class="p-4">Email</th>
+          <th class="p-4 text-right">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+      {% for student in students %}
+
+        <tr class="border-t">
+
+          <td class="p-4 font-semibold text-gray-500">
+            #{{ loop.index }}
+          </td>
+
+          <td class="p-4 font-semibold text-gray-800">
+            {{ student.name }}
+          </td>
+
+          <td class="p-4 text-gray-600">
+            {{ student.email }}
+          </td>
+
+          <td class="p-4 text-right">
+
+            <a href="{{ url_for('students.delete_student', id=loop.index0) }}"
+               class="inline-block bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
+                Supprimer
+            </a>
+
+          </td>
+
+        </tr>
+
+      {% endfor %}
+
+      {% if students|length == 0 %}
+
+      <tr>
+        <td colspan="4" class="text-center p-8 text-gray-400">
+          Aucun étudiant enregistré
+        </td>
+      </tr>
+
+      {% endif %}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+{% endblock %}
+>>>>>>> correction-bouton
