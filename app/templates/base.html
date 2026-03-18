@@ -15,6 +15,8 @@
 
     .sidebar-item { border-radius:12px; }
     .sidebar-item:hover { background:rgba(124,92,191,0.07); }
+    nav a.active { color: purple; font-weight: 800; }
+    nav a { color: gray; font-weight: 600; }
   </style>
 
 </head>
@@ -32,23 +34,23 @@
 
   <nav class="flex flex-col gap-2 flex-1">
 
-    <a href="/dashboard" class="sidebar-item px-3 py-3 text-sm font-semibold text-purple-600">
+    <a href="/dashboard" class="sidebar-item px-3 py-3 text-sm font-semibold  {{ 'active' if request.path == '/dashboard' else '' }}">
       Dashboard
     </a>
 
-    <a href="/students" class="sidebar-item px-3 py-4 text-sm text-gray-500">
+    <a href="/students" class="sidebar-item px-3 py-4 text-sm  {{ 'active' if request.path == '/students' else '' }}">
       Étudiants
     </a>
 
-    <a href="/teachers" class="sidebar-item px-3 py-4 text-sm text-gray-500">
+    <a href="/teachers" class="sidebar-item px-3 py-4 text-sm  {{ 'active' if request.path == '/teachers' else '' }}">
       Enseignants
     </a>
 
-    <a href="/courses" class="sidebar-item px-3 py-4 text-sm text-gray-500">
+    <a href="/courses" class="sidebar-item px-3 py-4 text-sm  {{ 'active' if request.path == '/courses' else '' }}">
       Cours
     </a>
 
-    <a href="/logout" class="sidebar-item px-3 py-4 text-sm text-red-400 mt-6">
+    <a href="/logout" class="sidebar-item px-3 py-4 text-sm text-red-400 mt-6 {{ 'active' if request.path == '/logout' else '' }}">
       Logout
     </a>
 
