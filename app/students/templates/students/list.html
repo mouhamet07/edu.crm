@@ -12,7 +12,7 @@
 
     <a href="{{ url_for('students.create') }}"
       class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
-      Ajouter un étudiant
+      <i class="bi bi-plus-circle"></i> Ajouter un étudiant
     </a>
 
   </div>
@@ -23,11 +23,11 @@
     <table class="w-full text-sm">
 
       <thead class="bg-gray-50">
-        <tr class="text-left text-gray-500 uppercase text-xs">
+        <tr class="text-gray-500 uppercase text-xs">
           <th class="p-4">ID</th>
           <th class="p-4">Nom</th>
           <th class="p-4">Email</th>
-          <th class="p-4 text-right">Actions</th>
+          <th class="p-4">Actions</th>
         </tr>
       </thead>
 
@@ -38,7 +38,7 @@
         <tr class="border-t">
 
           <td class="p-4 font-semibold text-gray-500">
-            #{{ student.id }}
+            {{ student.id }}
           </td>
 
           <td class="p-4 font-semibold text-gray-800">
@@ -52,8 +52,8 @@
           <td class="p-4 text-right">
 
             <a href="{{ url_for('students.delete_student', id=student.id) }}"
-              class="text-red-500 hover:text-red-700 text-sm font-semibold">
-              Supprimer
+              class="inline-block bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
+              <i class="bi bi-trash3"></i> Supprimer
             </a>
 
           </td>

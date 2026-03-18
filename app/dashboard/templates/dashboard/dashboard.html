@@ -1,105 +1,138 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="rounded-2xl flex items-center justify-between px-8 py-6 mb-8"
-      style="background:linear-gradient(135deg,#ede9f8 0%,#dcd3f5 100%);">
-    <div>
-      <h2 class="text-2xl font-extrabold text-gray-800">Bienvenue 👋</h2>
-      <p class="text-gray-500 text-sm mt-1">
-        Gérez vos étudiants, enseignants et cours depuis un seul endroit.
-      </p>
 
-      <div class="flex gap-3 mt-4">
-        <a href="{{ url_for('students.create') }}"
-          class="text-xs font-semibold px-4 py-2 rounded-xl text-white"
-          style="background:#7c5cbf;">
-          + Ajouter un étudiant
-        </a>
+<!-- ================= BANNIÈRE ================= -->
 
-        <a href="{{ url_for('courses.index') }}"
-          class="text-xs font-semibold px-4 py-2 rounded-xl"
-          style="background:rgba(255,255,255,0.5);color:#7c5cbf;">
-          Voir les cours
-        </a>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="grid grid-cols-3 gap-6 mb-10">
-
-    <div class="rounded-2xl p-6 text-white"
-        style="background:linear-gradient(135deg,#a580e0 0%,#7c5cbf 100%);">
-      <p class="text-4xl font-extrabold">{{ total_students }}</p>
-      <p class="text-sm mt-1">Total Étudiants</p>
-    </div>
-
-    <div class="rounded-2xl p-6 text-white"
-        style="background:linear-gradient(135deg,#4a90d9 0%,#2c6fad 100%);">
-      <p class="text-4xl font-extrabold">{{ total_teachers }}</p>
-      <p class="text-sm mt-1">Total Enseignants</p>
-    </div>
-
-    <div class="rounded-2xl p-6 text-white"
-        style="background:linear-gradient(135deg,#2ecc8f 0%,#1a9968 100%);">
-      <p class="text-4xl font-extrabold">{{ total_courses }}</p>
-      <p class="text-sm mt-1">Total Cours</p>
-    </div>
-
-  </div>
-
+<div class="rounded-2xl flex items-center justify-between px-8 py-6 mb-8"
+     style="background:linear-gradient(135deg,#ede9f8 0%,#dcd3f5 100%);">
 
   <div>
-
-    <div class="flex items-center justify-between mb-4">
-      <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
-        Cours récents
-      </p>
-
-      <a href="{{ url_for('courses.create') }}"
-        class="text-xs font-semibold px-3 py-1.5 rounded-lg text-white"
-        style="background:#7c5cbf;">
-        + Nouveau cours
-      </a>
-    </div>
+    <h2 class="text-2xl font-extrabold text-gray-800">Bienvenue </h2>
+    <p class="text-gray-500 text-sm mt-1">
+      Gérez vos étudiants, enseignants et cours depuis un seul endroit.
+    </p>
 
 
-    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
 
-      <div class="grid grid-cols-12 px-6 py-3 bg-gray-50 border-b text-xs font-bold text-gray-400 uppercase">
-        <p class="col-span-5">Intitulé</p>
-        <p class="col-span-4">Enseignant</p>
-        <p class="col-span-1">Actions</p>
-      </div>
+  </div>
+
+  
+
+</div>
 
 
-      {% for course in recent_courses %}
 
-      <div class="grid grid-cols-12 items-center px-6 py-4 border-b">
+<!-- ================= CARDS STATS ================= -->
 
-        <div class="col-span-5">
-          <p class="font-semibold text-gray-800 text-sm">{{ course.title }}</p>
-          <p class="text-xs text-gray-400">id: #{{ course.id }}</p>
-        </div>
+<div class="grid grid-cols-3 gap-6 mb-10">
 
-        <div class="col-span-4 text-sm text-gray-600">
-          {{ course.teacher }}
-        </div>
+  <!-- Étudiants -->
 
-        <div class="col-span-1">
-          <a href="{{ url_for('courses.delete_course', id=course.id) }}"
-            class="text-xs text-red-400">
-            Suppr.
-          </a>
-        </div>
+  <div class="rounded-2xl p-6 text-white"
+       style="background:linear-gradient(135deg,#a580e0 0%,#7c5cbf 100%);">
+    <p class="text-4xl font-extrabold">{{ total_students }}</p>
+    <p class="text-sm mt-1">Total Étudiants</p>
+  </div>
 
-      </div>
+  <!-- Enseignants -->
+
+  <div class="rounded-2xl p-6 text-white"
+       style="background:linear-gradient(135deg,#4a90d9 0%,#2c6fad 100%);">
+    <p class="text-4xl font-extrabold">{{ total_teachers }}</p>
+    <p class="text-sm mt-1">Total Enseignants</p>
+  </div>
+
+  <!-- Cours -->
+
+  <div class="rounded-2xl p-6 text-white"
+       style="background:linear-gradient(135deg,#2ecc8f 0%,#1a9968 100%);">
+    <p class="text-4xl font-extrabold">{{ total_courses }}</p>
+    <p class="text-sm mt-1">Total Cours</p>
+  </div>
+
+</div>
+
+<!-- ================= TABLEAU DES COURS ================= -->
+
+<div>
+
+  <!-- Titre -->
+
+  <div class="flex items-center justify-between mb-4">
+    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
+      Etudiant récemment ajoutés
+    </p>
+
+  <a href="{{ url_for('students.create') }}"
+      class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+      <i class="bi bi-plus-circle"></i> Nouvel étudiant
+    </a>
+</button>
+
+
+  </div>
+
+  
+  <div class="bg-white rounded-xl shadow border border-gray-100 overflow-hidden">
+
+    <table class="w-full text-sm">
+
+      <thead class="bg-gray-50">
+        <tr class="text-gray-500 uppercase text-xs">
+          <th class="p-4">ID</th>
+          <th class="p-4">Nom</th>
+          <th class="p-4">Email</th>
+          <th class="p-4 ">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+      {% for student in students %}
+
+        <tr class="border-t">
+
+          <td class="p-4 font-semibold text-gray-500">
+            {{ student.id }}
+          </td>
+
+          <td class="p-4 font-semibold text-gray-800">
+            {{ student.name }}
+          </td>
+
+          <td class="p-4 text-gray-600">
+            {{ student.email }}
+          </td>
+
+          <td class="p-4 text-right">
+
+            <a href="{{ url_for('students.delete_student', id=loop.index0) }}"
+              class="inline-block bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
+                <i class="bi bi-trash3"></i> Supprimer
+            </a>
+
+          </td>
+
+        </tr>
 
       {% endfor %}
 
-    </div>
+      {% if students|length == 0 %}
+
+      <tr>
+        <td colspan="4" class="text-center p-8 text-gray-400">
+          Aucun étudiant enregistré
+        </td>
+      </tr>
+
+      {% endif %}
+
+      </tbody>
+
+    </table>
 
   </div>
+
 
 {% endblock %}
