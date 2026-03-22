@@ -5,8 +5,8 @@
 <div class="p-8 max-w-2xl">
 
     <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">Ajouter un nouvel enseignant</h1>
-        <p class="text-gray-600 mt-2">Remplissez tous les champs pour créer un nouvel enseignant</p>
+        <h1 class="text-3xl font-bold text-gray-800">Modifier l'enseignant</h1>
+        <p class="text-gray-600 mt-2">ID: <span class="font-semibold">{{ teacher.id }}</span></p>
     </div>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -23,34 +23,34 @@
 
         <div>
             <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nom complet</label>
-            <input type="text" id="name" name="name" required placeholder="Ex: Ismaïl Toure"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+            <input type="text" id="name" name="name" value="{{ teacher.name }}" required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600">
         </div>
 
         <div>
             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email (@gmail.com)</label>
-            <input type="email" id="email" name="email" required placeholder="Ex: ism@gmail.com"
+            <input type="email" id="email" name="email" value="{{ teacher.email }}" required
             pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
-            <p class="text-sm text-gray-500 mt-1"> L'email doit être au format @gmail.com</p>
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600">
+            <p class="text-sm text-gray-500 mt-1">⚠️ L'email doit être au format @gmail.com</p>
         </div>
 
         <div>
             <label for="speciality" class="block text-sm font-medium text-gray-700 mb-2">Spécialité</label>
             <select id="speciality" name="speciality" required 
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600">
                 <option value="">Sélectionnez une spécialité</option>
-                <option value="Dev">Développement</option>
-                <option value="Base de donnees">Base de données</option>
-                <option value="Reseaux">Réseaux</option>
-                <option value="Web">Web</option>
-                <option value="Mobile">Mobile</option>
+                <option value="Dev" {% if teacher.speciality == 'Dev' %}selected{% endif %}>Développement</option>
+                <option value="Base de donnees" {% if teacher.speciality == 'Base de donnees' %}selected{% endif %}>Base de données</option>
+                <option value="Reseaux" {% if teacher.speciality == 'Reseaux' %}selected{% endif %}>Réseaux</option>
+                <option value="Web" {% if teacher.speciality == 'Web' %}selected{% endif %}>Web</option>
+                <option value="Mobile" {% if teacher.speciality == 'Mobile' %}selected{% endif %}>Mobile</option>
             </select>
         </div>
 
         <div class="flex gap-4 pt-4">
-            <button type="submit" class="flex-1 bg-purple-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-purple-700 transition">
-                <i class="bi bi-check-circle"></i> Créer l'enseignant
+            <button type="submit" class="flex-1 bg-yellow-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-yellow-700 transition">
+                <i class="bi bi-check-circle"></i> Modifier
             </button>
             <a href="{{ url_for('teachers.teachers_list') }}" class="flex-1 bg-gray-300 text-gray-800 font-semibold px-6 py-2 rounded-lg hover:bg-gray-400 transition text-center">
                 <i class="bi bi-x-circle"></i> Annuler
