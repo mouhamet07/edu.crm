@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-8 max-w-xl">
+
+    <h1 class="text-2xl font-bold mb-4">
+        {{ course.title }}
+    </h1>
+
+    <p class="mb-2">
+        <strong>Enseignant :</strong> {{ teacher }}
+    </p>
+
+    <p class="mb-4">
+        <strong>Nombre d’étudiants :</strong> {{ students|length }}
+    </p>
+
+    <h3 class="font-semibold mb-2">Liste des étudiants :</h3>
+
+    <ul class="space-y-2">
+
+        {% for student in students %}
+
+        <li class="flex justify-between items-center border p-2 rounded">
+
+            <span>{{ student.name }}</span>
+
+            
+            <a href="{{ url_for('courses.remove_student', course_id=course.id, student_id=student.id) }}"
+            class="bg-red-500 text-white px-2 py-1 rounded text-sm">
+            Retirer
+            </a>
+
+        </li>
+
+        {% else %}
+            <li class="text-gray-400">Aucun étudiant</li>
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+{% endblock %}

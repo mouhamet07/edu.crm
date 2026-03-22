@@ -14,11 +14,12 @@
             placeholder="Nom du cours"
             class="w-full border p-2 rounded mb-4">
 
-            <select name="teacher" class="w-full border p-2 rounded">
+            <select name="teacher" class="w-full border p-2 rounded mb-4">
+                <option value="">-- Aucun enseignant --</option>
                 {% for teacher in teachers %}
-                <option value="{{ teacher.id }}">
-                {{ teacher.name }}
-                </option>
+                    <option value="{{ teacher.id }}">
+                        {{ teacher.name }}
+                    </option>
                 {% endfor %}
             </select>
 
