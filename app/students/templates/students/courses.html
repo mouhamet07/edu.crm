@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-8">
+
+  <h1 class="text-2xl font-bold mb-4">
+    Cours de {{ student.name }}
+  </h1>
+
+  <table class="w-full border">
+
+    <thead>
+      <tr class="bg-gray-100">
+        <th>ID</th>
+        <th>Nom du cours</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+    {% for course in courses %}
+
+      <tr>
+        <td>{{ course.id }}</td>
+        <td>{{ course.title }}</td>
+      </tr>
+
+    {% endfor %}
+
+    {% if courses|length == 0 %}
+
+      <tr>
+        <td colspan="2" class="text-center p-4">
+          Aucun cours assigné
+        </td>
+      </tr>
+
+    {% endif %}
+
+    </tbody>
+
+  </table>
+
+  <a href="{{ url_for('students.index') }}"
+     class="mt-4 inline-block bg-gray-500 text-white px-4 py-2 rounded">
+     Retour
+  </a>
+
+</div>
+
+{% endblock %}
