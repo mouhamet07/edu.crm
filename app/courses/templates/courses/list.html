@@ -6,34 +6,43 @@
 
     <h1 class="text-2xl font-bold mb-6">Cours</h1>
 
-    
+    <!-- ACTIONS -->
     <div class="flex items-center space-x-3 mb-4">
 
         <a href="{{ url_for('courses.create') }}"
-        class="bg-purple-600 text-white px-4 py-2 rounded">
-        <i class="bi bi-plus-circle"></i> Créer un cours
+        class="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+        <i class="bi bi-plus-circle"></i>
+        Créer un cours
         </a>
 
         <a href="{{ url_for('courses.assign') }}"
-        class="bg-blue-600 text-white px-4 py-2 rounded">
-        <i class="bi bi-plus-circle"></i> Assigner un etudiant
+        class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        <i class="bi bi-person-plus"></i>
+        Assigner un étudiant
         </a>
 
         <a href="{{ url_for('courses.assign_teacher') }}"
-        class="bg-green-600 text-white px-4 py-2 rounded">
-        <i class="bi bi-person-plus"></i> Assigner un enseignant
+        class="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+        <i class="bi bi-person-badge"></i>
+        Assigner un enseignant
         </a>
 
     </div>
 
-    
-    <form method="GET" action="{{ url_for('courses.search') }}" class="mb-4">
+    <!-- SEARCH -->
+    <form method="GET" action="{{ url_for('courses.search') }}" class="mb-4 flex gap-2">
+
         <input type="text" name="q" placeholder="Rechercher un cours..."
         class="border p-2 rounded w-64">
-        <button class="bg-gray-600 text-white px-3 py-2 rounded">Rechercher</button>
+
+        <button class="flex items-center gap-1 bg-gray-600 text-white px-3 py-2 rounded hover:bg-gray-700">
+            <i class="bi bi-search"></i>
+            Rechercher
+        </button>
+
     </form>
 
-    
+    <!-- TABLE -->
     <table class="w-full bg-white rounded shadow mt-4">
 
         <thead class="bg-gray-100">
@@ -51,9 +60,13 @@
 
             <tr class="border-t hover:bg-gray-50">
 
-                <td class="p-3 text-center font-medium">{{ course.id }}</td>
+                <td class="p-3 text-center font-medium">
+                    {{ course.id }}
+                </td>
 
-                <td class="p-3 text-center">{{ course.title }}</td>
+                <td class="p-3 text-center">
+                    {{ course.title }}
+                </td>
 
                 <td class="p-3 text-center">
                     {% if course.teacher %}
@@ -67,21 +80,25 @@
 
                     <div class="flex justify-center space-x-2">
 
-                        
+                        <!-- MODIFIER -->
                         <a href="{{ url_for('courses.edit', id=course.id) }}" 
-                        class="bg-yellow-500 text-white px-3 py-1.5 rounded hover:bg-yellow-600">
+                        class="flex items-center gap-1 bg-yellow-500 text-white px-3 py-1.5 rounded hover:bg-yellow-600">
+                        <i class="bi bi-pencil"></i>
                         Modifier
                         </a>
 
-                       
+                        <!-- SUPPRIMER -->
                         <a href="{{ url_for('courses.delete', id=course.id) }}" 
-                        class="bg-red-500 text-white px-3 py-1.5 rounded hover:bg-red-600">
+                        class="flex items-center gap-1 bg-red-500 text-white px-3 py-1.5 rounded hover:bg-red-600">
+                        <i class="bi bi-trash"></i>
                         Supprimer
                         </a>
 
+                        <!-- DETAILS -->
                         <a href="{{ url_for('courses.detail', id=course.id) }}" 
-                        class="bg-gray-600 text-white px-3 py-1.5 rounded">
-                        Details
+                        class="flex items-center gap-1 bg-gray-600 text-white px-3 py-1.5 rounded hover:bg-gray-700">
+                        <i class="bi bi-eye"></i>
+                        Détails
                         </a>
 
                     </div>

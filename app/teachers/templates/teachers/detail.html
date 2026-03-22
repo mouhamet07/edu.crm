@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-8 max-w-2xl mx-auto">
+
+<a href="{{ url_for('teachers.index') }}"
+    class="inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 mb-4">
+    ← Retour
+    </a>
+
+
+<div class="bg-white p-6 rounded shadow">
+
+<h2 class="text-xl font-bold mb-4">Détails enseignant</h2>
+
+<p><strong>Nom :</strong> {{ teacher.name }}</p>
+<p><strong>Email :</strong> {{ teacher.email }}</p>
+<p><strong>Spécialité :</strong> {{ teacher.speciality }}</p>
+
+</div>
+
+<div class="bg-white p-6 rounded shadow mt-6">
+
+<h3 class="font-semibold mb-3">Cours enseignés</h3>
+
+{% if teacher.get('courses') %}
+  {% for course in teacher['courses'] %}
+    <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded">
+      {{ course }}
+    </span>
+  {% endfor %}
+{% else %}
+  <p class="text-gray-400">Aucun cours</p>
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

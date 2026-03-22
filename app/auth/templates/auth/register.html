@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Edu.CRM — Connexion</title>
+  <title>Edu.CRM — Inscription</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
@@ -18,7 +18,7 @@
     .btn-main:active { transform: translateY(0); filter: brightness(0.96); }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-[#eef2f6]">
+<body class="min-h-screen flex items-center justify-center bg-[#eef2f6] py-10">
 
   <div class="flex flex-col items-center w-full max-w-sm">
 
@@ -34,12 +34,12 @@
         <div class="w-24 h-24 rounded-full flex items-center justify-center shadow-lg"
              style="background:linear-gradient(135deg,#a580e0,#7c5cbf);">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+            <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
           </svg>
         </div>
       </div>
 
-      <h1 class="text-center text-gray-600 text-lg font-semibold mb-5 tracking-wide">Connexion</h1>
+      <h1 class="text-center text-gray-600 text-lg font-semibold mb-5 tracking-wide">Créer un compte</h1>
 
       <!-- Flash messages -->
       {% with messages = get_flashed_messages(with_categories=true) %}
@@ -62,7 +62,7 @@
         {% endif %}
       {% endwith %}
 
-      <form method="POST" action="{{ url_for('auth.login') }}" class="space-y-4">
+      <form method="POST" action="{{ url_for('auth.register') }}" class="space-y-4">
 
         <!-- Username -->
         <div class="relative">
@@ -82,28 +82,48 @@
         <!-- Password + toggle oeil -->
         <div class="relative">
           <input
-            id="pwd-login"
+            id="pwd"
             type="password"
             name="password"
-            placeholder="••••••••"
+            placeholder="Mot de passe"
             class="input-field w-full border border-gray-200 rounded-xl px-4 py-3 pr-12 text-sm text-gray-700 bg-gray-50 transition"
           />
-          <button type="button" onclick="togglePwd('pwd-login', 'eye-login')"
+          <button type="button" onclick="togglePwd('pwd', 'eye-pwd')"
             class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition">
-            <svg id="eye-login" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <svg id="eye-pwd" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
             </svg>
           </button>
         </div>
 
+        <!-- Confirm password + toggle oeil -->
+        <div class="relative">
+          <input
+            id="pwd-confirm"
+            type="password"
+            name="confirm_password"
+            placeholder="Confirmer le mot de passe"
+            oninput="checkMatch()"
+            class="input-field w-full border border-gray-200 rounded-xl px-4 py-3 pr-12 text-sm text-gray-700 bg-gray-50 transition"
+          />
+          <button type="button" onclick="togglePwd('pwd-confirm', 'eye-confirm')"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition">
+            <svg id="eye-confirm" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+            </svg>
+          </button>
+        </div>
+        <!-- Message correspondance -->
+        <p id="match-msg" class="text-right hidden" style="font-size:11px; margin-top:-8px;"></p>
+
         <button class="btn-main w-full text-white font-semibold text-sm tracking-widest uppercase rounded-xl py-3 mt-2">
-          Se connecter
+          S'inscrire
         </button>
       </form>
 
       <p class="text-center text-sm text-gray-400 mt-6">
-        Pas encore de compte ?
-        <a href="{{ url_for('auth.register') }}" class="font-semibold hover:underline" style="color:#7c5cbf;">S'inscrire</a>
+        Déjà un compte ?
+        <a href="{{ url_for('auth.login') }}" class="font-semibold hover:underline" style="color:#7c5cbf;">Se connecter</a>
       </p>
 
     </div>
@@ -119,6 +139,24 @@
         ? `<path stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"
              d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-5 0-9.27-3.11-11-7.5a10.05 10.05 0 0 1 2.06-3.44M9.9 4.24A9.12 9.12 0 0 1 12 4c5 0 9.27 3.11 11 7.5a10.08 10.08 0 0 1-1.32 2.49M3 3l18 18"/>`
         : `<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>`;
+    }
+
+    function checkMatch() {
+      const pwd     = document.getElementById('pwd').value;
+      const confirm = document.getElementById('pwd-confirm').value;
+      const msg     = document.getElementById('match-msg');
+      const input   = document.getElementById('pwd-confirm');
+      if (!confirm) { msg.classList.add('hidden'); return; }
+      msg.classList.remove('hidden');
+      if (pwd === confirm) {
+        msg.textContent = '✓ Les mots de passe correspondent';
+        msg.style.color = '#1eab6d';
+        input.style.borderColor = '#1eab6d';
+      } else {
+        msg.textContent = '✗ Les mots de passe ne correspondent pas';
+        msg.style.color = '#f86d8e';
+        input.style.borderColor = '#f86d8e';
+      }
     }
   </script>
 </body>
