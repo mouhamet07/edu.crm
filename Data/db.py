@@ -1,8 +1,8 @@
 students = [
-    {"id": 1, "name": "Aissatou Diallo", "email": "aissatou@email.com"},
-    {"id": 2, "name": "Moussa Traore", "email": "moussa@email.com"},
-    {"id": 3, "name": "Fatou Ndiaye", "email": "fatou@email.com"},
-    {"id": 4, "name": "Fatoumata Ndione", "email": "fatoumata@email.com"}
+    {"id": 1, "name": "Aissatou Diallo", "email": "aissatou@email.com","active": True},
+    {"id": 2, "name": "Moussa Traore", "email": "moussa@email.com","active": True},
+    {"id": 3, "name": "Fatou Ndiaye", "email": "fatou@email.com","active": False},
+    {"id": 4, "name": "Fatoumata Ndione", "email": "fatoumata@email.com","active": True}
 ]
 
 teachers = [

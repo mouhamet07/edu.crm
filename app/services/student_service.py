@@ -1,3 +1,5 @@
+# app/services/student_service.py
+
 from Data.db import students
 
 
@@ -9,12 +11,16 @@ def add_student(name, email):
     for student in students:
         if student["email"].lower() == email.lower():
             return None
+
     student_id = len(students) + 1
+
     student = {
         "id": student_id,
         "name": name,
-        "email": email
+        "email": email,
+        "active": True  # ✅ IMPORTANT
     }
+
     students.append(student)
     return student
 
