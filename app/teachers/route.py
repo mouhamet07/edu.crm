@@ -7,8 +7,9 @@ from app.services.teacher_service import (
     count_teacher_courses
 )
 
-@teachers_bp.route('/')
-def teachers_list():
+@teachers_bp.route('/teachers')
+@login_required
+def index():
     search = request.args.get('search', '').strip()
     speciality = request.args.get('speciality', '').strip()
 
@@ -28,6 +29,7 @@ def teachers_list():
 
 
 @teachers_bp.route('/create', methods=['GET', 'POST'])
+@login_required
 def create_teacher():
     if request.method == 'POST':
         name = request.form.get('name', '').strip()
@@ -44,21 +46,24 @@ def create_teacher():
             return render_template('teachers/create.html')
         
         flash('Enseignant créé avec succès', 'success')
-        return redirect(url_for('teachers.teachers_list'))
+        return redirect(url_for('teachers.index'))
 
     return render_template('teachers/create.html')
 
 
 @teachers_bp.route('/delete/<int:id>')
+@login_required
+@admin_required
 def delete_teacher_route(id):
     if delete_teacher(id):
         flash('Enseignant supprimé avec succès', 'success')
     else:
         flash('Erreur lors de la suppression', 'error')
-    return redirect(url_for('teachers.teachers_list'))
+    return redirect(url_for('teachers.index'))
 
 
 @teachers_bp.route('/search', methods=['GET', 'POST'])
+@login_required
 def search_teacher():
     results = []
     query = ''
@@ -74,11 +79,12 @@ def search_teacher():
 
 
 @teachers_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit_teacher(id):
     teacher = next((t for t in list_teachers() if t['id'] == id), None)
     if not teacher:
         flash('Enseignant non trouvé', 'error')
-        return redirect(url_for('teachers.teachers_list'))
+        return redirect(url_for('teachers.index'))
     
     if request.method == 'POST':
         name = request.form.get('name', '').strip()
@@ -95,16 +101,17 @@ def edit_teacher(id):
             return render_template('teachers/edit.html', teacher=teacher)
         
         flash('Enseignant modifié avec succès', 'success')
-        return redirect(url_for('teachers.teachers_list'))
+        return redirect(url_for('teachers.index'))
     
     return render_template('teachers/edit.html', teacher=teacher)
 
 
 @teachers_bp.route('/courses/<int:id>')
+@login_required
 def teacher_courses(id):
     teacher = next((t for t in list_teachers() if t['id'] == id), None)
     if not teacher:
-        return redirect(url_for('teachers.teachers_list'))
+        return redirect(url_for('teachers.index'))
     
     courses = get_teacher_courses(id)
     return render_template('teachers/courses.html', teacher=teacher, courses=courses)
