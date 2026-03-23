@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash
 from . import students_bp
 from app.services.student_service import get_student_courses
-
+from app.services.auth_service import login_required, admin_required
 from app.services.student_service import (
     list_students,
     add_student,
@@ -15,6 +15,7 @@ from app.services.student_service import (
 
 
 @students_bp.route("/students")
+@login_required
 def index():
 
     query = request.args.get("q")
@@ -29,6 +30,7 @@ def index():
 
 
 @students_bp.route("/students/create", methods=["GET", "POST"])
+@login_required
 def create():
 
     if request.method == "POST":
@@ -49,6 +51,8 @@ def create():
     return render_template("students/create.html")
 
 @students_bp.route("/students/delete/<int:id>")
+@login_required
+@admin_required
 def delete_student(id):
 
     student_id = id + 1
@@ -64,6 +68,7 @@ def delete_student(id):
 
 
 @students_bp.route("/students/update/<int:id>", methods=["GET", "POST"])
+@login_required
 def update(id):
 
     student_id = id + 1
@@ -85,6 +90,7 @@ def update(id):
 
 
 @students_bp.route("/students/toggle-status/<int:id>")
+@login_required
 def toggle_status(id):
 
     toggle_student_status(id)
@@ -94,6 +100,7 @@ def toggle_status(id):
     return redirect(url_for("students.index"))
 
 @students_bp.route("/students/<int:id>/courses")
+@login_required
 def student_courses_view(id):
 
     student = get_student_by_id(id)

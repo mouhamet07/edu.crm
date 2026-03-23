@@ -1,8 +1,11 @@
-﻿from flask import Blueprint, render_template, request, redirect, url_for, flash
-from app.services.teacher_service import add_teacher, list_teachers, delete_teacher, search_teachers, update_teacher, filter_teachers_by_speciality, get_teacher_courses, count_teacher_courses
-
-teachers_bp = Blueprint('teachers', __name__, url_prefix='/teachers', template_folder='templates')
-
+﻿from flask import render_template, request, redirect, url_for,flash
+from . import teachers_bp
+from app.services.auth_service import login_required, admin_required
+from app.services.teacher_service import (
+    add_teacher, list_teachers, delete_teacher, search_teachers, 
+    update_teacher, filter_teachers_by_speciality, get_teacher_courses, 
+    count_teacher_courses
+)
 
 @teachers_bp.route('/')
 def teachers_list():

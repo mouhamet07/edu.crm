@@ -8,7 +8,7 @@ from app.services.course_service import (
 )
 from app.services.teacher_service import (list_teachers)
 from app.services.student_service import (list_students)
-from app.services.auth_service import login_required
+from app.services.auth_service import login_required, admin_required
 
 
 @courses_bp.route("/courses")
@@ -41,6 +41,7 @@ def create():
 
 @courses_bp.route("/courses/delete/<int:id>")
 @login_required
+@admin_required
 def delete(id):
     resultat = delete_course(id)
 
