@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-8 flex justify-center">
+
+  <div class="w-full max-w-2xl">
+
+    <!-- RETOUR -->
+   <a href="{{ url_for('students.index') }}"
+    class="inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 mb-4">
+    ← Retour
+    </a>
+
+    <!-- CARD PRINCIPALE -->
+    <div class="bg-white rounded shadow p-6">
+
+      <h2 class="text-xl font-bold mb-6 text-gray-800">
+        Détails de l’étudiant
+      </h2>
+
+      <!-- INFOS -->
+      <div class="space-y-4">
+
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-500">ID</span>
+          <span class="font-semibold">#{{ student.id }}</span>
+        </div>
+
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-500">Nom</span>
+          <span class="font-semibold">{{ student.name }}</span>
+        </div>
+
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-500">Email</span>
+          <span class="text-gray-700">{{ student.email }}</span>
+        </div>
+
+        <div class="flex justify-between border-b pb-2">
+          <span class="text-gray-500">Statut</span>
+
+          {% if student['active'] %}
+            <span class="bg-green-100 text-green-600 px-3 py-1 rounded text-xs font-semibold">
+              Actif
+            </span>
+          {% else %}
+            <span class="bg-gray-100 text-gray-500 px-3 py-1 rounded text-xs">
+              Inactif
+            </span>
+          {% endif %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- COURS -->
+    <div class="bg-white rounded shadow p-6 mt-6">
+
+      <h3 class="text-lg font-semibold mb-4 text-gray-800">
+        Cours suivis
+      </h3>
+
+      {% if student.get('courses') and student['courses']|length > 0 %}
+
+        <div class="flex flex-wrap gap-2">
+
+          {% for course in student['courses'] %}
+            <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">
+              {{ course }}
+            </span>
+          {% endfor %}
+
+        </div>
+
+      {% else %}
+        <p class="text-gray-400 italic">
+          Aucun cours assigné
+        </p>
+      {% endif %}
+
+    </div>
+
+    <!-- ACTIONS -->
+    
+
+  </div>
+
+</div>
+
+{% endblock %}

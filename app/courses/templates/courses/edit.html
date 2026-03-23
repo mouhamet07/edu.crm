@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-8 flex justify-center">
+
+  <div class="w-full max-w-xl">
+
+    <!-- RETOUR -->
+    <a href="{{ url_for('courses.index') }}"
+    class="inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 mb-4">
+    ← Retour
+    </a>
+    <!-- CARD -->
+    <div class="bg-white rounded shadow p-6">
+
+      <h1 class="text-2xl font-bold text-gray-800 mb-6">
+        Modifier le cours
+      </h1>
+
+      <form method="POST" class="space-y-5">
+
+        <!-- NOM DU COURS -->
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">
+            Nom du cours
+          </label>
+
+          <input name="name"
+            value="{{ course.title }}"
+            class="w-full border border-gray-200 px-4 py-2.5 rounded focus:outline-none focus:ring-2 focus:ring-purple-300">
+        </div>
+
+        <!-- ENSEIGNANT -->
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">
+            Enseignant
+          </label>
+
+          <select name="teacher"
+            class="w-full border border-gray-200 px-4 py-2.5 rounded focus:outline-none focus:ring-2 focus:ring-purple-300">
+
+            <option value="">-- Aucun enseignant --</option>
+
+            {% for teacher in teachers %}
+              <option value="{{ teacher.id }}"
+                {% if course.teacher_id == teacher.id %}selected{% endif %}>
+                {{ teacher.name }}
+              </option>
+            {% endfor %}
+
+          </select>
+        </div>
+
+        <!-- BOUTONS -->
+        <div class="flex items-center gap-3 pt-2">
+
+          <!-- MODIFIER -->
+          <button
+            class="flex items-center gap-2 bg-yellow-500 text-white px-5 py-2 rounded hover:bg-yellow-600">
+            <i class="bi bi-pencil"></i>
+            Modifier
+          </button>
+
+          <!-- ANNULER -->
+          <a href="{{ url_for('courses.index') }}"
+             class="px-5 py-2 rounded bg-gray-100 hover:bg-gray-200 text-sm">
+            Annuler
+          </a>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}
