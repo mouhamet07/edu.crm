@@ -24,15 +24,19 @@ def list_teachers():
     return teachers
 
 def delete_teacher(teacher_id):
+    # Vérifier si l'enseignant a des cours assignés
+    if count_teacher_courses(teacher_id) > 0:
+        return False, "Impossible de supprimer un enseignant qui a des cours assignés"
+    
     for teacher in teachers:
         if teacher["id"] == teacher_id:
             teachers.remove(teacher)
-            return True
-    return False
+            return True, None
+    return False, "Enseignant non trouvé"
 
 def search_teachers(query):
     query = query.lower()
-    return [teacher for teacher in teachers if query in teacher["name"].lower() or query in teacher["email"].lower()]
+    return [teacher for teacher in teachers if query in teacher["name"].lower() or query in teacher["email"].lower() or query in teacher["speciality"].lower()]
 
 def update_teacher(teacher_id, name, email, speciality):
     if not validate_email(email):

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Liste des enseignants</h2>
+
+<a href="{{ url_for('teachers.create_teacher') }}">Ajouter un enseignant</a> | <a href="{{ url_for('teachers.search_teacher') }}">Rechercher</a>
+
+<form method="GET" class="mb-4">
+    <input type="text" name="search" placeholder="Rechercher par nom, email ou spécialité" value="{{ search_query }}">
+    <select name="speciality">
+        <option value="">Toutes les spécialités</option>
+        <option value="Mathématiques" {% if speciality_filter == 'Mathématiques' %}selected{% endif %}>Mathématiques</option>
+        <option value="Physique" {% if speciality_filter == 'Physique' %}selected{% endif %}>Physique</option>
+        <option value="Informatique" {% if speciality_filter == 'Informatique' %}selected{% endif %}>Informatique</option>
+        <!-- Ajouter d'autres spécialités si nécessaire -->
+    </select>
+    <button type="submit">Filtrer</button>
+</form>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Spécialité</th>
+            <th>Nombre de cours</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for teacher in teachers %}
+        <tr>
+            <td>{{ teacher.id }}</td>
+            <td>{{ teacher.name }}</td>
+            <td>{{ teacher.email }}</td>
+            <td>{{ teacher.speciality }}</td>
+            <td>{{ teacher.course_count }}</td>
+            <td>
+                <a href="{{ url_for('teachers.edit_teacher', id=teacher.id) }}">Modifier</a> |
+                <a href="{{ url_for('teachers.teacher_courses', id=teacher.id) }}">Voir cours</a> |
+                <a href="{{ url_for('teachers.delete_teacher_route', id=teacher.id) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet enseignant ?')">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
