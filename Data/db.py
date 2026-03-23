@@ -67,5 +67,12 @@ courses = [
 student_courses = {}
 
 users = {
-    "admin": "passe"
+    "admin": {
+        "password": "passe",
+        "role": "admin"
+    },
+    "mouhamet": {
+        "password": "passe",
+        "role": "user"
+    }
 }

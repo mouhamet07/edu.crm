@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for,flash
 from . import teachers_bp
 from app.services.teacher_service import add_teacher, list_teachers, delete_teacher
-from app.services.auth_service import login_required
+from app.services.auth_service import login_required, admin_required
 
 
 @teachers_bp.route("/teachers")
@@ -25,6 +25,7 @@ def create():
 
 @teachers_bp.route("/teachers/delete/<int:id>")
 @login_required
+@admin_required
 def delete_teacher(id):
     if delete_teacher(id):
         flash("Enseignant supprimé", "success")
