@@ -37,93 +37,113 @@
 
     {% if students %}
 
-    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="bg-white rounded-lg shadow overflow-hidden">
 
-        <table class="w-full">
+            <table class="w-full">
 
-            <thead class="bg-gray-100 border-b">
-                <tr>
-                    <th class="px-6 py-3 text-center text-sm font-semibold text-gray-800">ID</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Photo</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Nom</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Email</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Statut</th>
-                    <th class="px-6 py-3 text-center text-sm font-semibold text-gray-800">Actions</th>
-                </tr>
-            </thead>
+                <thead class="bg-gray-100 border-b">
+                    <tr>
+                        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-800">ID</th>
+                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Photo</th>
+                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Nom</th>
+                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Email</th>
+                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Statut</th>
+                        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-800">Actions</th>
+                    </tr>
+                </thead>
 
-            <tbody>
+                <tbody>
 
-                {% for student in students %}
+                    {% for student in students %}
 
-                <tr class="border-b hover:bg-gray-50 transition">
+                    <tr class="border-b hover:bg-gray-50 transition">
 
-                    <td class="px-6 py-4 text-center text-sm font-semibold text-gray-900">
-                        {{ student.id }}
-                    </td>
+                        <td class="px-6 py-4 text-center text-sm font-semibold text-gray-900">
+                            {{ student.id }}
+                        </td>
 
-                    <td class="px-6 py-4 ">
-                        <img src="{{ student.photo | default('https://via.placeholder.com/50') }}"
-                             class="w-10 h-10 rounded-full">
-                    </td>
+                        <td class="px-6 py-4 ">
+                            <img src="{{ student.photo | default('https://via.placeholder.com/50') }}"
+                                class="w-10 h-10 rounded-full">
+                        </td>
 
-                    <td class="px-6 py-4  text-sm text-gray-900">
-                        {{ student.name }}
-                    </td>
+                        <td class="px-6 py-4  text-sm text-gray-900">
+                            {{ student.name }}
+                        </td>
 
-                    <td class="px-6 py-4  text-sm text-blue-600">
-                        {{ student.email }}
-                    </td>
+                        <td class="px-6 py-4  text-sm text-blue-600">
+                            {{ student.email }}
+                        </td>
 
-                    <td class="px-6 py-4  text-sm">
-                        {% if student.status == "actif" %}
-                            <span class="inline-block bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-semibold">
-                                Actif
-                            </span>
-                        {% else %}
-                            <span class="inline-block bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-xs font-semibold">
-                                Inactif
-                            </span>
-                        {% endif %}
-                    </td>
+                        <td class="px-6 py-4  text-sm">
+                            {% if student.status == "actif" %}
+                                <span class="inline-block bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-semibold">
+                                    Actif
+                                </span>
+                            {% else %}
+                                <span class="inline-block bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-xs font-semibold">
+                                    Inactif
+                                </span>
+                            {% endif %}
+                        </td>
 
-                    <td class="px-6 py-4 text-center">
+                        <td class="px-6 py-4 text-center">
 
-                        <div class="inline-flex gap-2">
+                            <div class="inline-flex gap-2">
 
-                            <a href="{{ url_for('students.update', id=student.id) }}"
-                               class="bg-yellow-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-yellow-600 transition flex items-center gap-1">
-                                <i class="bi bi-pencil"></i>
-                                Modifier
-                            </a>
+                                <a href="{{ url_for('students.update', id=student.id) }}"
+                                class="bg-yellow-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-yellow-600 transition flex items-center gap-1">
+                                    <i class="bi bi-pencil"></i>
+                                    Modifier
+                                </a>
 
-                            <a href="{{ url_for('students.student_courses_view', id=student.id) }}"
-                               class="bg-blue-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-blue-600 transition flex items-center gap-1">
-                                <i class="bi bi-book"></i>
-                                Cours
-                            </a>
+                                <a href="{{ url_for('students.student_courses_view', id=student.id) }}"
+                                class="bg-blue-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-blue-600 transition flex items-center gap-1">
+                                    <i class="bi bi-book"></i>
+                                    Cours
+                                </a>
 
-                            <a href="{{ url_for('students.delete_student', id=student.id) }}"
-                               onclick="return confirm('Supprimer {{ student.name }} ?')"
-                               class="bg-red-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-red-600 transition flex items-center gap-1">
-                                <i class="bi bi-trash"></i>
-                                Supprimer
-                            </a>
+                                <a href="{{ url_for('students.delete_student', id=student.id) }}"
+                                onclick="return confirm('Supprimer {{ student.name }} ?')"
+                                class="bg-red-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-red-600 transition flex items-center gap-1">
+                                    <i class="bi bi-trash"></i>
+                                    Supprimer
+                                </a>
 
-                        </div>
+                            </div>
 
-                    </td>
+                        </td>
 
-                </tr>
+                    </tr>
 
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+            
+        </div>
+        {% if total_pages > 1 %}
+            <div class="mt-4 flex items-center justify-center gap-2">
+                <a href="{{ url_for('students.index', page=page-1, q=request.args.get('q','')) }}"
+                class="px-3 py-1 rounded border text-sm
+                        {% if page == 1 %}pointer-events-none bg-gray-100 text-gray-400{% else %}hover:bg-gray-100 text-gray-700{% endif %}">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+                {% for p in range(1, total_pages + 1) %}
+                    <a href="{{ url_for('students.index', page=p, q=request.args.get('q','')) }}"
+                    class="px-3 py-1 rounded border text-sm font-medium
+                            {% if p == page %}bg-purple-600 text-white border-purple-600{% else %}hover:bg-gray-100 text-gray-700{% endif %}">
+                        {{ p }}
+                    </a>
                 {% endfor %}
-
-            </tbody>
-
-        </table>
-
-    </div>
-
+                <a href="{{ url_for('students.index', page=page+1, q=request.args.get('q','')) }}"
+                class="px-3 py-1 rounded border text-sm
+                        {% if page == total_pages %}pointer-events-none bg-gray-100 text-gray-400{% else %}hover:bg-gray-100 text-gray-700{% endif %}">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </div>
+        {% endif %}
     {% else %}
 
     <div class="text-center py-12 bg-gray-50 rounded-lg">
