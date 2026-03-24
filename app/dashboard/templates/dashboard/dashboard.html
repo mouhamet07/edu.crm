@@ -2,111 +2,122 @@
 
 {% block content %}
 
-<div class="rounded-2xl flex items-center justify-between px-8 py-6 mb-8"
-     style="background:linear-gradient(135deg,#ede9f8 0%,#dcd3f5 100%);">
+<div class="p-0">
 
-  <div>
-    <h2 class="text-2xl font-extrabold text-gray-800">Bienvenue</h2>
-    <p class="text-gray-500 text-sm mt-1">
-      Gérez vos étudiants, enseignants et cours depuis un seul endroit.
-    </p>
+  <div class="rounded-2xl flex items-center justify-between px-8 py-6 mb-8"
+       style="background:linear-gradient(135deg,#ede9f8 0%,#dcd3f5 100%);">
+
+    <div>
+      <h2 class="text-2xl font-extrabold text-gray-800">Bienvenue</h2>
+      <p class="text-gray-500 text-sm mt-1">
+        Gérez vos étudiants, enseignants et cours depuis un seul endroit.
+      </p>
+    </div>
+
   </div>
 
-</div>
+  <div class="grid grid-cols-3 gap-6 mb-10">
 
-<div class="grid grid-cols-3 gap-6 mb-10">
+    <div class="rounded-2xl p-6 text-white"
+         style="background:linear-gradient(135deg,#a580e0 0%,#7c5cbf 100%);">
+      <p class="text-4xl font-extrabold">{{ total_students }}</p>
+      <p class="text-sm mt-1">Total Étudiants</p>
+    </div>
 
-  <div class="rounded-2xl p-6 text-white"
-       style="background:linear-gradient(135deg,#a580e0 0%,#7c5cbf 100%);">
-    <p class="text-4xl font-extrabold">{{ total_students }}</p>
-    <p class="text-sm mt-1">Total Étudiants</p>
+    <div class="rounded-2xl p-6 text-white"
+         style="background:linear-gradient(135deg,#4a90d9 0%,#2c6fad 100%);">
+      <p class="text-4xl font-extrabold">{{ total_teachers }}</p>
+      <p class="text-sm mt-1">Total Enseignants</p>
+    </div>
+
+    <div class="rounded-2xl p-6 text-white"
+         style="background:linear-gradient(135deg,#2ecc8f 0%,#1a9968 100%);">
+      <p class="text-4xl font-extrabold">{{ total_courses }}</p>
+      <p class="text-sm mt-1">Total Cours</p>
+    </div>
+
   </div>
 
-  <div class="rounded-2xl p-6 text-white"
-       style="background:linear-gradient(135deg,#4a90d9 0%,#2c6fad 100%);">
-    <p class="text-4xl font-extrabold">{{ total_teachers }}</p>
-    <p class="text-sm mt-1">Total Enseignants</p>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <div class="lg:col-span-2">
+
+      <div class="bg-white rounded-xl shadow p-4">
+
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
+          Étudiants récents
+        </p>
+
+        <table class="w-full text-sm">
+
+          <thead class="bg-gray-50">
+            <tr class="text-gray-500 uppercase text-xs">
+              <th class="py-2 px-3 text-center">Photo</th>
+              <th class="py-2 px-3 text-center">Nom</th>
+              <th class="py-2 px-3 text-center">Email</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+          {% for student in students %}
+
+            <tr class="border-t hover:bg-gray-50">
+
+              <td class="py-2 px-3 text-center">
+                <img src="{{ student.photo }}"
+                     class="w-8 h-8 rounded-full mx-auto">
+              </td>
+
+              <td class="py-2 px-3 text-center font-medium">
+                {{ student.name }}
+              </td>
+
+              <td class="py-2 px-3 text-center text-gray-500">
+                {{ student.email }}
+              </td>
+
+            </tr>
+
+          {% endfor %}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+    <div class="flex flex-col gap-6">
+
+      <div class="bg-white rounded-xl shadow p-5">
+        <h3 class="text-sm font-semibold text-gray-500 mb-2">
+          Cours le plus rempli
+        </h3>
+        <p class="text-lg font-bold text-gray-800">
+          {{ top_course.title if top_course else "Aucun" }}
+        </p>
+        <p class="text-sm text-purple-600 mt-1">
+          {{ top_course_count if top_course else 0 }} étudiants
+        </p>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-5">
+        <h3 class="text-sm font-semibold text-gray-500 mb-2">
+          Enseignant le plus actif
+        </h3>
+        <p class="text-lg font-bold text-gray-800">
+          {{ top_teacher.name if top_teacher else "Aucun" }}
+        </p>
+        <p class="text-sm text-blue-600 mt-1">
+          {{ top_teacher_count if top_teacher else 0 }} cours
+        </p>
+      </div>
+
+    </div>
+
   </div>
-
-  <div class="rounded-2xl p-6 text-white"
-       style="background:linear-gradient(135deg,#2ecc8f 0%,#1a9968 100%);">
-    <p class="text-4xl font-extrabold">{{ total_courses }}</p>
-    <p class="text-sm mt-1">Total Cours</p>
-  </div>
-
-</div>
-
-<div>
-
-  <div class="flex items-center justify-between mb-4">
-    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">
-      Étudiants récemment ajoutés
-    </p>
-
-    <a href="{{ url_for('students.create') }}"
-       class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
-       <i class="bi bi-plus-circle"></i> Nouvel étudiant
-    </a>
-  </div>
-
-  <table class="w-full bg-white rounded shadow mt-4">
-
-    <thead class="bg-gray-100">
-      <tr>
-        <th class="py-2 px-3 text-center">Photo</th>
-        <th class="py-2 px-3 text-center">Nom</th>
-        <th class="py-2 px-3 text-center">Email</th>
-        <th class="py-2 px-3 text-center">Statut</th>
-      </tr>
-    </thead>
-
-    <tbody>
-
-      {% if students and students|length > 0 %}
-
-        {% for student in students %}
-
-        <tr class="border-t hover:bg-gray-50">
-
-          <td class="py-2 px-3 text-center">
-            <img src="{{ student.photo | default('https://via.placeholder.com/50') }}"
-                 width="40" height="40"
-                 style="border-radius:50%; margin:auto;">
-          </td>
-
-          <td class="py-2 px-3 text-center font-medium">
-            {{ student.name }}
-          </td>
-
-          <td class="py-2 px-3 text-center text-gray-600">
-            {{ student.email }}
-          </td>
-
-          <td class="py-2 px-3 text-center">
-            {% if student.status | default("actif") == "actif" %}
-              <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs">Actif</span>
-            {% else %}
-              <span class="bg-gray-100 text-gray-500 px-2 py-1 rounded text-xs">Inactif</span>
-            {% endif %}
-          </td>
-
-        </tr>
-
-        {% endfor %}
-
-      {% else %}
-
-        <tr>
-          <td colspan="4" class="text-center py-4 text-gray-400">
-            Aucun étudiant enregistré
-          </td>
-        </tr>
-
-      {% endif %}
-
-    </tbody>
-
-  </table>
 
 </div>
 
