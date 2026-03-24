@@ -59,18 +59,18 @@ Les services contiennent la logique métier :
 ---
 
 ## Membres du groupe et répartition des tâches
-Mouhamet THIAM→ Authentification & Sécurité
-Mael Maela KOUTOGLO → Module Students
-Régine GAO TAO Fouka → Module Teachers
-Hilly Maryse OKANA → Module Courses
-Reine Sandra SEH → Dashboard & UI
+- Mouhamet THIAM → Authentification & Sécurité
+- Mael Maela KOUTOGLO → Module Students
+- Régine GAO TAO Fouka → Module Teachers
+- Hilly Maryse OKANA → Module Courses
+- Reine Sandra SEH → Dashboard & UI
 
 ---
 
 ## Fonctionnalités
 ### Authentification & Sécurité
 Le module Auth permet de sécuriser l’accès à l’application et de contrôler les actions des utilisateurs.
--Inscription utilisateur : Permet de créer un nouveau compte utilisateur.
+- Inscription utilisateur : Permet de créer un nouveau compte utilisateur.
 - Authentification (Connexion / Déconnexion) : Permet à un utilisateur d’accéder ou de quitter l’application en toute sécurité.
 - Gestion des rôles : Chaque utilisateur possède un rôle : Administrateur ou Utilisateur
 - Gestion de session avec expiration automatique : La session expire automatiquement après une période d’inactivité.
@@ -80,15 +80,15 @@ Le module Auth permet de sécuriser l’accès à l’application et de contrôl
 ### Gestion des étudiants
 Le module Students permet une gestion complète des étudiants avec des fonctionnalités avancées visant à améliorer l’expérience utilisateur et la qualité des données.
 Le module Students permet de gérer les étudiants et leurs informations au sein de l’application.
--Liste des étudiants : Permet d’afficher tous les étudiants avec une interface claire et paginée.
--Ajout d’un étudiant : Permet de créer un étudiant avec validation de l’email (user@domaine.extension) et génération automatique d’un identifiant unique.
--Modification d’un étudiant : Permet de modifier les informations (nom, email) avec vérification des doublons et validation des données.
--Suppression d’un étudiant : Permet de supprimer un étudiant (action réservée à l’administrateur) avec confirmation.
--Recherche d’étudiant : Permet de rechercher un étudiant par son nom.
--Pagination : Permet de limiter l’affichage à 3 étudiants par page avec une navigation entre les pages.
--Gestion du statut : Permet de définir un étudiant comme actif ou inactif et de modifier son statut.
--Consultation des cours : Permet de voir les cours associés à un étudiant.
--Gestion des images : Permet d’ajouter une photo via une URL ou de générer automatiquement un avatar.
+- Liste des étudiants : Permet d’afficher tous les étudiants avec une interface claire et paginée.
+- Ajout d’un étudiant : Permet de créer un étudiant avec validation de l’email (user@domaine.extension) et génération automatique d’un identifiant unique.
+- Modification d’un étudiant : Permet de modifier les informations (nom, email) avec vérification des doublons et validation des données.
+- Suppression d’un étudiant : Permet de supprimer un étudiant (action réservée à l’administrateur) avec confirmation.
+- Recherche d’étudiant : Permet de rechercher un étudiant par son nom.
+- Pagination : Permet de limiter l’affichage à 3 étudiants par page avec une navigation entre les pages.
+- Gestion du statut : Permet de définir un étudiant comme actif ou inactif et de modifier son statut.
+- Consultation des cours : Permet de voir les cours associés à un étudiant.
+- Gestion des images : Permet d’ajouter une photo via une URL ou de générer automatiquement un avatar.
 ---
 ### Gestion des enseignants
 - Liste des enseignants
