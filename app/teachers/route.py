@@ -55,10 +55,11 @@ def create_teacher():
 @login_required
 @admin_required
 def delete_teacher_route(id):
-    if delete_teacher(id):
+    success, message = delete_teacher(id)
+    if success:
         flash('Enseignant supprimé avec succès', 'success')
     else:
-        flash('Erreur lors de la suppression', 'error')
+        flash(message, 'error')
     return redirect(url_for('teachers.index'))
 
 

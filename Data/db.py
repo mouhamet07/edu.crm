@@ -75,10 +75,10 @@ student_courses = {}
 users = {
     "admin": {
         "password": "passe",
-        "role": "admin"
+        "role": "Administrateur"
     },
-    "mouhamet": {
+    "user": {
         "password": "passe",
-        "role": "user"
+        "role": "Utilisateur"
     }
 }

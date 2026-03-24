@@ -43,7 +43,7 @@ def logout_service():
 from flask import session, redirect, url_for, flash
 from Data.db import users
 
-def register_service(username, password, role="user"):
+def register_service(username, password, role="Utilisateur"):
     if username in users:
         flash("Utilisateur existe deja", "warning")
         return redirect(url_for("auth.register"))
