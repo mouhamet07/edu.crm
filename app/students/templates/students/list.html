@@ -4,105 +4,133 @@
 
 <div class="p-8">
 
-    <!-- TITRE -->
-    <h1 class="text-2xl font-bold mb-6">Étudiants</h1>
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Gestion des Étudiants</h1>
+        <p class="text-gray-600 mt-2">
+            Total: <span class="font-semibold text-purple-600">{{ students|length }}</span> étudiant(s)
+        </p>
+    </div>
 
-    <!-- ACTION -->
-    <div class="flex items-center space-x-3 mb-4">
+    <div class="mb-6 flex flex-wrap gap-4">
+
         <a href="{{ url_for('students.create') }}"
-           class="bg-purple-600 text-white px-4 py-2 rounded">
-            <i class="bi bi-plus-circle"></i> Créer un étudiant
+           class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition flex items-center gap-2">
+            <i class="bi bi-plus-circle"></i> Ajouter étudiant
         </a>
+
     </div>
 
-    <!-- SEARCH -->
-    <form method="GET" action="{{ url_for('students.index') }}" class="mb-4">
-        <input type="text" name="q" placeholder="Rechercher un étudiant..."
-               class="border p-2 rounded w-64">
-        <button class="bg-gray-600 text-white px-3 py-2 rounded">
-            Rechercher
-        </button>
-    </form>
+    <div class="mb-6">
+        <form method="GET" action="{{ url_for('students.index') }}" class="flex flex-wrap gap-2 items-end">
 
-    <!-- TABLE -->
-    <table class="w-full bg-white rounded shadow mt-4">
+            <input type="text" name="q"
+                   placeholder="Rechercher un étudiant..."
+                   class="flex-1 min-w-[240px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
 
-        <thead class="bg-gray-100">
-            <tr>
-                <th class="p-3 text-center">ID</th>
-                <th class="p-3 text-center">Photo</th>
-                <th class="p-3 text-center">Nom</th>
-                <th class="p-3 text-center">Email</th>
-                <th class="p-3 text-center">Statut</th>
-                <th class="p-3 text-center">Actions</th>
-            </tr>
-        </thead>
+            <button type="submit"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+                <i class="bi bi-search"></i> Filtrer
+            </button>
 
-        <tbody>
-
-            {% for student in students %}
-
-            <tr class="border-t hover:bg-gray-50">
-
-                <td class="p-3 text-center font-medium">{{ student.id }}</td>
-
-                <td class="p-3 text-center">
-                    <img src="{{ student.photo | default('https://via.placeholder.com/50') }}"
-                         width="50" height="50"
-                         style="border-radius:50%; margin:auto;">
-                </td>
-
-                <td class="p-3 text-center">{{ student.name }}</td>
-
-                <td class="p-3 text-center text-gray-600">{{ student.email }}</td>
-
-                <td class="p-3 text-center">
-                    {% if student['active'] %}
-                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs">Actif</span>
-                    {% else %}
-                        <span class="bg-gray-100 text-gray-500 px-2 py-1 rounded text-xs">Inactif</span>
-                    {% endif %}
-                </td>
-
-                <td class="p-3 text-center">
-                    <div class="flex justify-center space-x-2">
-
-                        <a href="{{ url_for('students.edit', id=student.id) }}"
-                           class="bg-yellow-500 text-white px-3 py-1.5 rounded hover:bg-yellow-600">
-                            <i class="bi bi-pencil"></i> Modifier
-                        </a>
-
-                        <a href="{{ url_for('students.delete_student', id=student.id) }}"
-                           onclick="return confirm('Supprimer {{ student.name }} ?')"
-                           class="bg-red-500 text-white px-3 py-1.5 rounded hover:bg-red-600">
-                            <i class="bi bi-trash"></i> Supprimer
-                        </a>
-
-                        <a href="{{ url_for('students.detail', id=student.id) }}"
-                           class="bg-gray-600 text-white px-3 py-1.5 rounded hover:bg-gray-700">
-                            <i class="bi bi-eye"></i> Détails
-                        </a>
-
-                    </div>
-                </td>
-
-            </tr>
-
-            {% endfor %}
-
-        </tbody>
-
-    </table>
-
-    <!-- PAGINATION -->
-    <div class="mt-4 flex space-x-2">
-        <a href="{{ url_for('students.index', page=1) }}"
-           class="px-3 py-1 border rounded hover:bg-gray-100">1</a>
-        <a href="{{ url_for('students.index', page=2) }}"
-           class="px-3 py-1 border rounded hover:bg-gray-100">2</a>
-        <a href="{{ url_for('students.index', page=3) }}"
-           class="px-3 py-1 border rounded hover:bg-gray-100">3</a>
+        </form>
     </div>
+
+    {% if students %}
+
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+
+        <table class="w-full">
+
+            <thead class="bg-gray-100 border-b">
+                <tr>
+                    <th class="px-6 py-3 text-center text-sm font-semibold text-gray-800">ID</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Photo</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Nom</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Email</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Statut</th>
+                    <th class="px-6 py-3 text-center text-sm font-semibold text-gray-800">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for student in students %}
+
+                <tr class="border-b hover:bg-gray-50 transition">
+
+                    <td class="px-6 py-4 text-center text-sm font-semibold text-gray-900">
+                        {{ student.id }}
+                    </td>
+
+                    <td class="px-6 py-4 text-left">
+                        <img src="{{ student.photo | default('https://via.placeholder.com/50') }}"
+                             class="w-10 h-10 rounded-full">
+                    </td>
+
+                    <td class="px-6 py-4 text-left text-sm text-gray-900">
+                        {{ student.name }}
+                    </td>
+
+                    <td class="px-6 py-4 text-left text-sm text-blue-600">
+                        {{ student.email }}
+                    </td>
+
+                    <td class="px-6 py-4 text-left text-sm">
+                        {% if student.status == "actif" %}
+                            <span class="inline-block bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-semibold">
+                                Actif
+                            </span>
+                        {% else %}
+                            <span class="inline-block bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-xs font-semibold">
+                                Inactif
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+
+                        <div class="inline-flex gap-2">
+
+                            <a href="{{ url_for('students.update', id=student.id) }}"
+                               class="bg-yellow-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-yellow-600 transition flex items-center gap-1">
+                                <i class="bi bi-pencil"></i>
+                                Modifier
+                            </a>
+
+                            <a href="{{ url_for('students.student_courses_view', id=student.id) }}"
+                               class="bg-blue-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-blue-600 transition flex items-center gap-1">
+                                <i class="bi bi-book"></i>
+                                Cours
+                            </a>
+
+                            <a href="{{ url_for('students.delete_student', id=student.id) }}"
+                               onclick="return confirm('Supprimer {{ student.name }} ?')"
+                               class="bg-red-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-red-600 transition flex items-center gap-1">
+                                <i class="bi bi-trash"></i>
+                                Supprimer
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="text-center py-12 bg-gray-50 rounded-lg">
+        <p class="text-gray-600">Aucun étudiant trouvé</p>
+    </div>
+
+    {% endif %}
 
 </div>
 
