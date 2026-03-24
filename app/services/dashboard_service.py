@@ -16,10 +16,19 @@ def get_total_courses():
 def get_recent_courses():
     recent_courses = []
     for course in courses:
-        teacher_name = next((t['name'] for t in teachers if t['id'] == course['teacher_id']), 'Inconnu')
+        teacher_name = next(
+            (t['name'] for t in teachers if t['id'] == course['teacher_id']),
+            'Inconnu'
+        )
         recent_courses.append({
             'id': course['id'],
             'title': course['title'],
             'teacher': teacher_name
         })
     return recent_courses
+
+
+
+def get_recent_students(limit=3):
+    sorted_students = sorted(students, key=lambda x: x["id"], reverse=True)
+    return sorted_students[:limit]
