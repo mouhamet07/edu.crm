@@ -1,10 +1,11 @@
 from app import create_app
-from datetime import timedelta
+from dotenv import load_dotenv
+from config import Config
+
+load_dotenv()
 
 app = create_app()
-
-app.config["SECRET_KEY"] = "dev"
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=60)
+app.config.from_object(Config)
 
 if __name__ == "__main__":
     app.run(debug=True)
