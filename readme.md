@@ -60,10 +60,10 @@ Les services contiennent la logique métier :
 
 ## Membres du groupe et répartition des tâches
 Mouhamet THIAM→ Authentification & Sécurité
-Étudiant 2 → Module Students
+Mael Maela KOUTOGLO → Module Students
 Régine GAO TAO Fouka → Module Teachers
 Hilly Maryse OKANA → Module Courses
-Étudiant 5 → Dashboard & UI
+Reine Sandra SEH → Dashboard & UI
 
 ---
 
@@ -78,14 +78,17 @@ Le module Auth permet de sécuriser l’accès à l’application et de contrôl
 - Gestion des accès ( admin_required) : Certaines actions sont réservées à l’administrateur comme la suppression d’étudiant
 ---
 ### Gestion des étudiants
-- Liste des étudiants
-- Ajout d’un étudiant
-- Suppression d’un étudiant
-- Modification d’un étudiant
-- Recherche par nom
-- Statut (actif / inactif)
-- Date d’inscription
-- Affichage des cours d’un étudiant
+Le module Students permet une gestion complète des étudiants avec des fonctionnalités avancées visant à améliorer l’expérience utilisateur et la qualité des données.
+Le module Students permet de gérer les étudiants et leurs informations au sein de l’application.
+-Liste des étudiants : Permet d’afficher tous les étudiants avec une interface claire et paginée.
+-Ajout d’un étudiant : Permet de créer un étudiant avec validation de l’email (user@domaine.extension) et génération automatique d’un identifiant unique.
+-Modification d’un étudiant : Permet de modifier les informations (nom, email) avec vérification des doublons et validation des données.
+-Suppression d’un étudiant : Permet de supprimer un étudiant (action réservée à l’administrateur) avec confirmation.
+-Recherche d’étudiant : Permet de rechercher un étudiant par son nom.
+-Pagination : Permet de limiter l’affichage à 3 étudiants par page avec une navigation entre les pages.
+-Gestion du statut : Permet de définir un étudiant comme actif ou inactif et de modifier son statut.
+-Consultation des cours : Permet de voir les cours associés à un étudiant.
+-Gestion des images : Permet d’ajouter une photo via une URL ou de générer automatiquement un avatar.
 ---
 ### Gestion des enseignants
 - Liste des enseignants
@@ -110,19 +113,19 @@ Le module Courses permet de créer et organiser les cours en y affectant des ens
 - Nombre d’étudiants par cours
 - Liste des étudiants inscrits dans un cours
 ---
-### Dashboard
-- Nombre total d’étudiants
-- Nombre total d’enseignants
-- Nombre total de cours
-- Statistiques avancées
-- Graphiques
-- Interface responsive
+### Dashboard et UI
+- Créer les interfaces: Mise en place des différentes interfaces de l’application à l’aide de templates HTML et de Tailwind CSS. Création d’un layout global avec base.html  incluant une sidebar pour la navigation et une topbar affichant l’utilisateur connecté. Développement des pages principales (dashboard, listes, formulaires) avec un design cohérent. Utilisation de url_for pour la gestion des liens entre les différentes routes de l’application.
+- Nombre total d’étudiants:Calcul et affichage dynamique du nombre total d’étudiants à partir des données stockées dans l’application, puis intégration de cette valeur dans le dashboard sous forme de carte statistique.
+- Nombre total d’enseignants: Récupération du nombre total d’enseignants et affichage dans le dashboard via une carte dédiée.
+- Nombre total de cours:Calcul du nombre total de cours enregistrés et affichage dans le dashboard.
+- Statistiques avancées: Mise en place de calculs supplémentaires à partir des données existantes, notamment: identification du cours ayant le plus d’étudiants, détermination de l’enseignant ayant le plus de cours assignés
 
 ---
 
 ## Architecture du projet
 edu_crm/
 │
+├── .venv/
 ├── app/
 │ ├── init.py (Application Factory)
 │ ├── auth/ (Blueprint Auth)
@@ -177,7 +180,7 @@ copy .env.example .env
 ```bash
 cp .env.example .env
 ```
-Ensuite, modifier les valeurs dans le fichier `.env` selon votre configuration.
+Ensuite, modifier les valeurs dans le fichier `.env` selon la configuration.
 Exemple :
 ```env
 SECRET_KEY=dev
@@ -194,6 +197,3 @@ flask run
 Ouvrir dans le navigateur :
 http://127.0.0.1:5000
 ---
-
-
-
