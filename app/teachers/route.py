@@ -52,8 +52,8 @@ def create_teacher():
 
 
 @teachers_bp.route('/delete/<int:id>')
-@login_required
 @admin_required
+@login_required
 def delete_teacher_route(id):
     success, message = delete_teacher(id)
     if success:

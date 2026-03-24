@@ -4,7 +4,7 @@ import re
 
 def validate_email(email):
     """Valide que l'email se termine par @gmail.com"""
-    pattern = r'^[a-zA-Z0-9._%+-]+@gmail\.com$'
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return re.match(pattern, email) is not None
 
 def list_students():
@@ -26,7 +26,7 @@ def add_student(name, email, photo):
         "name": name,
         "email": email,
         "status": "actif",
-        "photo": photo if photo else f"https://ui-avatars.com/api/?name={name}"
+        "photo": photo if photo else "https://via.placeholder.com/50"
     }
     students.append(student)
     return student

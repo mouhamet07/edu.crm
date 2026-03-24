@@ -17,7 +17,10 @@ def login_required(f):
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get("role") != "admin":
+        if "user" not in session:
+            flash("Vous devez être connecté", "warning")
+            return redirect(url_for("auth.login"))
+        if session.get("role") != "Administrateur":
             flash("Acces refuse", "danger")
             return redirect(url_for("dashboard.index"))
         return f(*args, **kwargs)

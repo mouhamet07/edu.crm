@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from . import students_bp
 from app.services.student_service import get_student_courses
 from app.services.auth_service import login_required, admin_required
+from app.services.student_service import validate_email, list_students
 from app.services.student_service import (
     list_students,
     add_student,
@@ -57,8 +58,8 @@ def create():
     return render_template("students/create.html")
 
 @students_bp.route("/students/delete/<int:id>")
-@login_required
 @admin_required
+@login_required
 def delete_student(id):
 
     result = delete_student_service(id)
@@ -80,9 +81,6 @@ def update(id):
     if request.method == "POST":
         name = request.form.get("name")
         email = request.form.get("email")
-
-        from app.services.student_service import validate_email, list_students
-
         if not validate_email(email):
             flash("Email invalide (doit être @gmail.com)", "danger")
             return redirect(url_for("students.update", id=id))

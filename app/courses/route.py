@@ -51,8 +51,8 @@ def create():
 
 
 @courses_bp.route("/courses/delete/<int:id>")
-@login_required
 @admin_required
+@login_required
 def delete(id):
     resultat = delete_course(id)
     if resultat:
@@ -164,6 +164,7 @@ def detail(id):
     )
 
 @courses_bp.route("/courses/<int:course_id>/remove-student/<int:student_id>")
+@admin_required
 @login_required
 def remove_student(course_id, student_id):
 
