@@ -4,114 +4,130 @@
 
 <div class="p-8">
 
-    <h1 class="text-2xl font-bold mb-6">Cours</h1>
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Gestion des Cours</h1>
+        <p class="text-gray-600 mt-2">
+            Total: <span class="font-semibold text-purple-600">{{ courses|length }}</span> cours
+        </p>
+    </div>
 
-    <!-- ACTIONS -->
-    <div class="flex items-center space-x-3 mb-4">
+    <div class="mb-6 flex flex-wrap gap-4">
 
         <a href="{{ url_for('courses.create') }}"
-        class="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
-        <i class="bi bi-plus-circle"></i>
-        Créer un cours
+           class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition flex items-center gap-2">
+            <i class="bi bi-plus-circle"></i> Ajouter cours
         </a>
 
         <a href="{{ url_for('courses.assign') }}"
-        class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-        <i class="bi bi-person-plus"></i>
-        Assigner un étudiant
+           class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+            <i class="bi bi-person-plus"></i> Assigner étudiant
         </a>
 
         <a href="{{ url_for('courses.assign_teacher') }}"
-        class="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-        <i class="bi bi-person-badge"></i>
-        Assigner un enseignant
+           class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition flex items-center gap-2">
+            <i class="bi bi-person-badge"></i> Assigner enseignant
         </a>
 
     </div>
 
-    <!-- SEARCH -->
-    <form method="GET" action="{{ url_for('courses.search') }}" class="mb-4 flex gap-2">
+    <div class="mb-6">
+        <form method="GET" action="{{ url_for('courses.search') }}" class="flex flex-wrap gap-2 items-end">
 
-        <input type="text" name="q" placeholder="Rechercher un cours..."
-        class="border p-2 rounded w-64">
+            <input type="text" name="q"
+                   placeholder="Rechercher un cours..."
+                   class="flex-1 min-w-[140px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
 
-        <button class="flex items-center gap-1 bg-gray-600 text-white px-3 py-2 rounded hover:bg-gray-700">
-            <i class="bi bi-search"></i>
-            Rechercher
-        </button>
+            <button type="submit"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+                <i class="bi bi-search"></i> Rechercher
+            </button>
 
-    </form>
+        </form>
+    </div>
 
-    <!-- TABLE -->
-    <table class="w-full bg-white rounded shadow mt-4">
+    {% if courses %}
 
-        <thead class="bg-gray-100">
-            <tr>
-                <th class="p-3 text-center">ID</th>
-                <th class="p-3 text-center">Nom</th>
-                <th class="p-3 text-center">Enseignant</th>
-                <th class="p-3 text-center">Actions</th>
-            </tr>
-        </thead>
+    <div class="bg-white rounded-lg shadow overflow-hidden">
 
-        <tbody>
+        <table class="w-full">
 
-            {% for course in courses %}
+            <thead class="bg-gray-100 border-b">
+                <tr>
+                    <th class="px-6 py-3 text-center text-sm font-semibold text-gray-800">ID</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Nom</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-800">Enseignant</th>
+                    <th class="px-6 py-3 text-center text-sm font-semibold text-gray-800">Actions</th>
+                </tr>
+            </thead>
 
-            <tr class="border-t hover:bg-gray-50">
+            <tbody>
 
-                <td class="p-3 text-center font-medium">
-                    {{ course.id }}
-                </td>
+                {% for course in courses %}
 
-                <td class="p-3 text-center">
-                    {{ course.title }}
-                </td>
+                <tr class="border-b hover:bg-gray-50 transition">
 
-                <td class="p-3 text-center">
-                    {% if course.teacher %}
-                        {{ course.teacher }}
-                    {% else %}
-                        <span class="text-gray-400 italic">Non assigné</span>
-                    {% endif %}
-                </td>
+                    <td class="px-6 py-4 text-center text-sm font-semibold text-gray-900">
+                        {{ course.id }}
+                    </td>
 
-                <td class="p-3 text-center">
+                    <td class="px-6 py-4 text-left text-sm text-gray-900">
+                        {{ course.title }}
+                    </td>
 
-                    <div class="flex justify-center space-x-2">
+                    <td class="px-6 py-4 text-left text-sm">
+                        {% if course.teacher %}
+                            <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                {{ course.teacher }}
+                            </span>
+                        {% else %}
+                            <span class="text-gray-400 italic">Non assigné</span>
+                        {% endif %}
+                    </td>
 
-                        <!-- MODIFIER -->
-                        <a href="{{ url_for('courses.edit', id=course.id) }}" 
-                        class="flex items-center gap-1 bg-yellow-500 text-white px-3 py-1.5 rounded hover:bg-yellow-600">
-                        <i class="bi bi-pencil"></i>
-                        Modifier
-                        </a>
+                    <td class="px-6 py-4 text-center">
 
-                        <!-- SUPPRIMER -->
-                        <a href="{{ url_for('courses.delete', id=course.id) }}" 
-                        class="flex items-center gap-1 bg-red-500 text-white px-3 py-1.5 rounded hover:bg-red-600">
-                        <i class="bi bi-trash"></i>
-                        Supprimer
-                        </a>
+                        <div class="inline-flex gap-2">
 
-                        <!-- DETAILS -->
-                        <a href="{{ url_for('courses.detail', id=course.id) }}" 
-                        class="flex items-center gap-1 bg-gray-600 text-white px-3 py-1.5 rounded hover:bg-gray-700">
-                        <i class="bi bi-eye"></i>
-                        Détails
-                        </a>
+                            <a href="{{ url_for('courses.edit', id=course.id) }}"
+                               class="bg-yellow-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-yellow-600 transition flex items-center gap-1">
+                                <i class="bi bi-pencil"></i>
+                                Modifier
+                            </a>
 
-                    </div>
+                            <a href="{{ url_for('courses.detail', id=course.id) }}"
+                               class="bg-blue-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-blue-600 transition flex items-center gap-1">
+                                <i class="bi bi-eye"></i>
+                                Détails
+                            </a>
 
-                </td>
+                            <a href="{{ url_for('courses.delete', id=course.id) }}"
+                               onclick="return confirm('Supprimer ce cours ?')"
+                               class="bg-red-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-red-600 transition flex items-center gap-1">
+                                <i class="bi bi-trash"></i>
+                                Supprimer
+                            </a>
 
-            </tr>
+                        </div>
 
-            {% endfor %}
+                    </td>
 
-        </tbody>
+                </tr>
 
-    </table>
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="text-center py-12 bg-gray-50 rounded-lg">
+        <p class="text-gray-600">Aucun cours trouvé</p>
+    </div>
+
+    {% endif %}
 
 </div>
 
