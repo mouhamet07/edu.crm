@@ -59,11 +59,11 @@ Les services contiennent la logique métier :
 ---
 
 ## Membres du groupe et répartition des tâches
-Mouhamet THIAM→ Authentification & Sécurité
-Mael Maela KOUTOGLO → Module Students
-Régine GAO TAO Fouka → Module Teachers
-Hilly Maryse OKANA → Module Courses
-Reine Sandra SEH → Dashboard & UI
+- Mouhamet THIAM → Authentification & Sécurité
+- Mael Maela KOUTOGLO → Module Students
+- Régine GAO TAO Fouka → Module Teachers
+- Hilly Maryse OKANA → Module Courses
+- Reine Sandra SEH → Dashboard & UI
 
 ---
 
