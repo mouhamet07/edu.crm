@@ -123,6 +123,7 @@ Le module Courses permet de créer et organiser les cours en y affectant des ens
 ---
 
 ## Architecture du projet
+```
 edu_crm/
 │
 ├── .venv/
@@ -141,7 +142,7 @@ edu_crm/
 ├── run.py
 ├── requirements.txt
 └── README.md
-
+```
 ---
 
 ## Installation et exécution
@@ -194,6 +195,5 @@ flask run
 ```
 ---
 ### 7. Accéder à l’application
-Ouvrir dans le navigateur :
-http://127.0.0.1:5000
+Ouvrir dans le navigateur : http://127.0.0.1:5000
 ---
