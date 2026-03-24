@@ -78,6 +78,7 @@ Le module Auth permet de sécuriser l’accès à l’application et de contrôl
 - Gestion des accès ( admin_required) : Certaines actions sont réservées à l’administrateur comme la suppression d’étudiant
 ---
 ### Gestion des étudiants
+
 Le module Students permet une gestion complète des étudiants avec des fonctionnalités avancées visant à améliorer l’expérience utilisateur et la qualité des données.
 Le module Students permet de gérer les étudiants et leurs informations au sein de l’application.
 - Liste des étudiants : Permet d’afficher tous les étudiants avec une interface claire et paginée.
