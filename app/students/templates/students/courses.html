@@ -2,50 +2,73 @@
 
 {% block content %}
 
-<div class="p-8">
+<div class="p-8 flex justify-center">
 
-  <h1 class="text-2xl font-bold mb-4">
-    Cours de {{ student.name }}
-  </h1>
+  <div class="w-full max-w-2xl">
 
-  <table class="w-full border">
+    <a href="{{ url_for('students.index') }}"
+       class="inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 mb-4">
+      ← Retour
+    </a>
 
-    <thead>
-      <tr class="bg-gray-100">
-        <th>ID</th>
-        <th>Nom du cours</th>
-      </tr>
-    </thead>
+    <div class="bg-white rounded shadow p-6 mb-6">
 
-    <tbody>
+      <h1 class="text-2xl font-bold text-gray-800 mb-4">
+        {{ student.name }}
+      </h1>
 
-    {% for course in courses %}
+      <div class="flex justify-between items-center">
 
-      <tr>
-        <td>{{ course.id }}</td>
-        <td>{{ course.title }}</td>
-      </tr>
+        <span class="text-gray-500">Nombre de cours</span>
 
-    {% endfor %}
+        <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-semibold">
+          {{ courses|length }}
+        </span>
 
-    {% if courses|length == 0 %}
+      </div>
 
-      <tr>
-        <td colspan="2" class="text-center p-4">
+    </div>
+
+    <div class="bg-white rounded shadow p-6">
+
+      <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+        <i class="bi bi-journal-bookmark"></i>
+        Liste des cours
+      </h3>
+
+      <ul class="space-y-3">
+
+        {% for course in courses %}
+
+        <li class="flex items-center justify-between border border-gray-100 p-3 rounded hover:bg-gray-50 transition">
+
+          <div class="flex items-center gap-3">
+
+            <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold">
+              {{ course.title[0]|upper }}
+            </div>
+
+            <span class="text-gray-700 font-medium">
+              {{ course.title }}
+            </span>
+
+          </div>
+
+        </li>
+
+        {% else %}
+
+        <li class="text-gray-400 italic text-center py-6">
           Aucun cours assigné
-        </td>
-      </tr>
+        </li>
 
-    {% endif %}
+        {% endfor %}
 
-    </tbody>
+      </ul>
 
-  </table>
+    </div>
 
-  <a href="{{ url_for('students.index') }}"
-     class="mt-4 inline-block bg-gray-500 text-white px-4 py-2 rounded">
-     Retour
-  </a>
+  </div>
 
 </div>
 
