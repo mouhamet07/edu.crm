@@ -36,7 +36,6 @@ def delete_student(student_id):
         if student.get("id") == student_id:
             students.remove(student)
             return True
-
     return False
 
 
@@ -45,12 +44,10 @@ def get_student_by_id(student_id):
     for student in students:
         if student.get("id") == student_id:
             return student
-
     return None
 
 
 def search_students(query):
-
     return [
         s for s in students
         if query.lower() in s["name"].lower()
