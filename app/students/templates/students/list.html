@@ -96,6 +96,11 @@
                                     <i class="bi bi-pencil"></i>
                                     Modifier
                                 </a>
+                                <a href="{{ url_for('students.toggle_status', id=student.id) }}"
+                                class="bg-green-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-yellow-600 transition flex items-center gap-1">
+                                    <i class="bi bi-toggle-on"></i>
+                                    Statut
+                                </a>
 
                                 <a href="{{ url_for('students.student_courses_view', id=student.id) }}"
                                 class="bg-blue-500 text-white px-3 py-1 rounded-md text-xs font-semibold hover:bg-blue-600 transition flex items-center gap-1">
